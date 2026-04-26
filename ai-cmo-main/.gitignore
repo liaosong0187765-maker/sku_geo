@@ -1,0 +1,17 @@
+.vscode
+.venv
+__marimo__
+__pycache__
+.litellm-cache
+.litellm_cache
+.data
+.ruff_cache
+.env.local
+.terraform
+.terraform.lock*
+.terraform.tfstate*
+vertex_credentials.json
+ee
+*.ee.*
+*.ee
+shared

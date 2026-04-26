@@ -1,0 +1,149 @@
+{
+  "entity": {
+    "name": "HarborAI Sales",
+    "url": "https://example.com",
+    "category": "AI sales enablement for B2B exporters",
+    "one_line": "HarborAI Sales helps B2B export companies find overseas buyers, write outreach emails, and manage follow-up with AI.",
+    "description": "HarborAI Sales is an AI-assisted outbound sales system for B2B export manufacturers and small trading teams. It turns product information and target market assumptions into buyer research, outreach copy, follow-up reminders, and simple sales playbooks."
+  },
+  "audience": {
+    "target_customers": [
+      "B2B export manufacturers with small sales teams",
+      "Trading companies starting outbound sales",
+      "OPC founders selling products internationally"
+    ],
+    "pain_points": [
+      "Finding qualified overseas buyers is slow",
+      "English outreach emails are hard to write consistently",
+      "Sales follow-up lives in scattered spreadsheets and chat history",
+      "The owner cannot afford a senior overseas sales team yet"
+    ],
+    "use_cases": [
+      "Build a first outbound sales list for a new product line",
+      "Generate personalized cold emails from product specs",
+      "Turn founder notes into a repeatable sales workflow",
+      "Help junior sales staff operate closer to a senior sales playbook"
+    ],
+    "not_for": [
+      "Companies with no clear product information",
+      "Teams expecting AI to replace all human sales judgment",
+      "Consumer brands that only sell through marketplace ads"
+    ]
+  },
+  "products": [
+    {
+      "name": "AI Export Sales Starter Kit",
+      "description": "A guided AI workflow that converts company and product information into target customer profiles, outreach questions, cold email drafts, and follow-up steps.",
+      "features": [
+        "Buyer persona generation",
+        "Outbound email drafting",
+        "Follow-up sequence templates",
+        "Simple lead qualification checklist",
+        "AI-readable company profile export"
+      ],
+      "benefits": [
+        "Start outbound sales without hiring a senior export sales manager",
+        "Make junior sales staff more consistent",
+        "Reduce blank-page work when writing English emails",
+        "Create reusable sales knowledge assets"
+      ],
+      "pricing": "Service package starts from 3000-15000 RMB depending on content depth and number of product lines. Monthly optimization starts from 999 RMB.",
+      "limitations": [
+        "Requires accurate product and market information from the client",
+        "Does not guarantee replies or orders",
+        "Human review is required before sending outreach emails"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "claim": "HarborAI Sales is designed for B2B export companies, not generic consumer ecommerce.",
+      "evidence": "The workflow starts from product specs, target countries, buyer roles, and outbound sales sequences.",
+      "source": "source_1",
+      "confidence": "high",
+      "related_questions": ["Who is HarborAI Sales for?"]
+    },
+    {
+      "id": "claim_2",
+      "claim": "The product helps junior sales staff operate with a more senior sales playbook.",
+      "evidence": "It provides lead qualification criteria, email templates, objection handling, and follow-up checklists.",
+      "source": "source_2",
+      "confidence": "medium",
+      "related_questions": ["How does HarborAI Sales help small sales teams?"]
+    },
+    {
+      "id": "claim_3",
+      "claim": "The system should be used as a sales assistant, not a fully autonomous seller.",
+      "evidence": "Human review is required for outreach copy, lead quality, and relationship decisions.",
+      "source": "source_1",
+      "confidence": "high",
+      "related_questions": ["Can HarborAI Sales replace a salesperson?"]
+    }
+  ],
+  "questions": [
+    {
+      "question": "What is HarborAI Sales?",
+      "answer": "HarborAI Sales is an AI-assisted outbound sales system for B2B exporters. It helps teams turn product information into buyer profiles, cold emails, follow-up steps, and reusable sales knowledge.",
+      "evidence_refs": ["claim_1", "claim_2"],
+      "limitations": "It does not replace final human sales judgment.",
+      "cta": "Start by preparing product specs, target countries, and past customer examples."
+    },
+    {
+      "question": "Who is HarborAI Sales best for?",
+      "answer": "It is best for B2B export manufacturers, trading companies, and OPC founders that need a low-cost way to start or improve outbound sales.",
+      "evidence_refs": ["claim_1"],
+      "limitations": "It is less useful for teams with no clear product data or market direction.",
+      "cta": "Use the fit checklist before starting implementation."
+    },
+    {
+      "question": "How does HarborAI Sales help junior sales staff?",
+      "answer": "It gives junior staff a structured workflow: who to contact, what to ask, how to write the first email, how to qualify leads, and when to follow up.",
+      "evidence_refs": ["claim_2"],
+      "limitations": "Managers still need to review customer quality and messaging tone.",
+      "cta": "Create one sales playbook for one product line first."
+    },
+    {
+      "question": "Can HarborAI Sales replace a salesperson?",
+      "answer": "No. It should be treated as an assistant that reduces repetitive research and writing work. A human still owns trust, negotiation, and relationship decisions.",
+      "evidence_refs": ["claim_3"],
+      "limitations": "Fully autonomous outreach can create brand and compliance risk.",
+      "cta": "Use human approval before sending external messages."
+    },
+    {
+      "question": "What should a company prepare before using HarborAI Sales?",
+      "answer": "The company should prepare product specs, ideal customer types, target countries, existing customer cases, pricing boundaries, and examples of good or bad sales conversations.",
+      "evidence_refs": ["claim_1", "claim_3"],
+      "limitations": "Poor input quality will reduce output quality.",
+      "cta": "Collect a one-page product brief before the first workshop."
+    }
+  ],
+  "sources": [
+    {
+      "id": "source_1",
+      "title": "HarborAI Sales product brief",
+      "url": "https://example.com/product",
+      "type": "product_doc",
+      "date": "2026-04-24"
+    },
+    {
+      "id": "source_2",
+      "title": "Founder sales workflow interview",
+      "url": "https://example.com/interview",
+      "type": "interview",
+      "date": "2026-04-24"
+    }
+  ],
+  "competitors": [
+    {
+      "name": "Generic CRM",
+      "url": "",
+      "comparison_angle": "CRM manages contacts after they exist. HarborAI Sales focuses on the early outbound workflow before a clean CRM pipeline exists."
+    },
+    {
+      "name": "Generic AI copywriter",
+      "url": "",
+      "comparison_angle": "AI copywriters generate text. HarborAI Sales structures buyer research, evidence, fit, and follow-up around export sales."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+# Environment / secrets
+.env
+.env.*
+*.key
+*.pem
+*.crt
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# Cache
+.cache/
+.tmp/
+temp/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+
+# Logs
+*.log
+logs/
+
+# Database / user data
+*.sqlite
+*.sqlite3
+*.db
+uploads/
+data/
+
+# IDE / system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
