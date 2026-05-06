@@ -1,0 +1,2 @@
+[console_scripts]
+creator-passport = creator_passport.__main__:main

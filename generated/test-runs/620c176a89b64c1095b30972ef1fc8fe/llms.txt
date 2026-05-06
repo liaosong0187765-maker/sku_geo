@@ -1,0 +1,22 @@
+# Northstar Tools Product Source Pack
+
+Manufacturer-owned product facts.
+
+## Canonical Product Source
+- NS 200 Field Meter: https://northstar.example/sku/ns-200-field-meter-hash200field
+- Markdown: /sku/ns-200-field-meter-hash200field.md
+- Product URL: https://northstar.example/products/ns-200
+- Content hash: hash200field
+
+## AI-Readable Files
+- /ai/product-index.md
+- /ai/products/ns-200-field-meter.md
+- /ai/categories/field-instruments.md
+- /ai/comparisons/field-instruments.md
+- /ai/faq.md
+- /ai/buying-guide.md
+- /llms-full.txt
+- /schema.json
+
+## Buyer Retrieval Questions
+- Is the NS 200 compatible with CAT III test leads?

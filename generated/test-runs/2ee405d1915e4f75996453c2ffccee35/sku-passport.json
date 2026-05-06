@@ -1,0 +1,290 @@
+{
+  "brand": {
+    "description": "Manufacturer-owned product facts.",
+    "domain": "https://northstar.example",
+    "id": "northstar-tools",
+    "market": "",
+    "name": "Northstar Tools",
+    "official_urls": [
+      "https://northstar.example/support"
+    ],
+    "support_urls": []
+  },
+  "sku": {
+    "brand_id": "northstar-tools",
+    "canonical_url": "https://northstar.example/products/ns-200",
+    "category": "field instruments",
+    "claims": [
+      {
+        "claim": "The product includes a backlit LCD display.",
+        "claim_type": "spec",
+        "confidence": "high",
+        "evidence_ids": [
+          "ev-display"
+        ],
+        "id": "claim-display",
+        "notes": ""
+      }
+    ],
+    "compatibility_notes": "",
+    "evidence": [
+      {
+        "anchor": "display",
+        "captured_at": "",
+        "confidence": "",
+        "excerpt": "Display: backlit LCD.",
+        "file_path": "",
+        "id": "ev-display",
+        "page": "",
+        "section": "Specifications",
+        "source_hash": "manualhash001",
+        "source_type": "manual",
+        "title": "NS 200 User Manual",
+        "url": "https://northstar.example/manuals/ns-200"
+      }
+    ],
+    "facts": {
+      "certifications": [
+        "IEC 61010"
+      ],
+      "compatibility": [
+        "CAT III test leads"
+      ],
+      "dimensions": {},
+      "included_items": [],
+      "key_specs": {
+        "display": "backlit LCD",
+        "measurement_modes": [
+          "AC voltage",
+          "continuity"
+        ]
+      },
+      "materials": [],
+      "ports": [],
+      "positioning": "",
+      "power": [],
+      "protocols": [],
+      "region_availability": [],
+      "requirements": [
+        "Two AA batteries"
+      ],
+      "summary": "A handheld field meter for measuring supported AC circuits.",
+      "warranty": [
+        "Two-year limited warranty"
+      ]
+    },
+    "id": "ns-200",
+    "limitations": [
+      "Extractor-only note should not render."
+    ],
+    "model_number": "NS-200",
+    "not_for": [
+      "Extractor-only exclusion should not render."
+    ],
+    "product_name": "NS 200 Field Meter",
+    "slug": "ns-200-field-meter",
+    "source_urls": [
+      "https://northstar.example/manuals/ns-200"
+    ],
+    "status": "draft",
+    "updated_at": "",
+    "use_cases": [
+      "Extractor-only use case should not render."
+    ]
+  },
+  "sku_source": {
+    "buying_questions": [
+      {
+        "category": "",
+        "competitor_context_ids": [],
+        "expected_facts": [],
+        "expected_limitations": [],
+        "id": "q-compat",
+        "intent": "compatibility",
+        "priority": "medium",
+        "question": "Is the NS 200 compatible with CAT III test leads?",
+        "sku_ids": [
+          "ns-200"
+        ]
+      }
+    ],
+    "canonical_path": "/sku/ns-200-field-meter-hash200field",
+    "canonical_url": "https://northstar.example/sku/ns-200-field-meter-hash200field",
+    "claims": [
+      {
+        "claim": "The product includes a backlit LCD display.",
+        "claim_type": "spec",
+        "confidence": "high",
+        "evidence_ids": [
+          "ev-display"
+        ],
+        "id": "claim-display",
+        "notes": ""
+      }
+    ],
+    "competitor_context": [
+      {
+        "avoid_claims": [
+          "Do not claim lower price."
+        ],
+        "basis": "Both are handheld field meters.",
+        "category": "field instruments",
+        "comparison_points": [
+          "Display type",
+          "Supported test leads"
+        ],
+        "competitor_name": "Field Gauge Co",
+        "competitor_product_name": "FG 10 Meter",
+        "competitor_url": "",
+        "id": "ctx-meter",
+        "known_differences": [
+          "NS 200 compatibility lists CAT III test leads."
+        ]
+      }
+    ],
+    "content_hash": "hash200field",
+    "created_at": "2026-05-06",
+    "evidence": [
+      {
+        "anchor": "display",
+        "captured_at": "",
+        "confidence": "",
+        "excerpt": "Display: backlit LCD.",
+        "file_path": "",
+        "id": "ev-display",
+        "page": "",
+        "section": "Specifications",
+        "source_hash": "manualhash001",
+        "source_type": "manual",
+        "title": "NS 200 User Manual",
+        "url": "https://northstar.example/manuals/ns-200"
+      }
+    ],
+    "facts": {
+      "certifications": [
+        "IEC 61010"
+      ],
+      "compatibility": [
+        "CAT III test leads"
+      ],
+      "dimensions": {},
+      "included_items": [],
+      "key_specs": {
+        "display": "backlit LCD",
+        "measurement_modes": [
+          "AC voltage",
+          "continuity"
+        ]
+      },
+      "materials": [],
+      "ports": [],
+      "positioning": "",
+      "power": [],
+      "protocols": [],
+      "region_availability": [],
+      "requirements": [
+        "Two AA batteries"
+      ],
+      "summary": "A handheld field meter for measuring supported AC circuits.",
+      "warranty": [
+        "Two-year limited warranty"
+      ]
+    },
+    "markdown_path": "/sku/ns-200-field-meter-hash200field.md",
+    "recommended_citation": "Northstar Tools, \"NS 200 Field Meter,\" SKU Source Passport v1, https://northstar.example/sku/ns-200-field-meter-hash200field",
+    "retrieval_runs": [],
+    "revision_suggestions": [],
+    "slug": "ns-200-field-meter",
+    "source_anchor": "SKU Source Passport: hash200field\nSource: https://northstar.example/sku/ns-200-field-meter-hash200field",
+    "topics": [
+      "field instruments",
+      "electrical testing"
+    ],
+    "updated_at": "2026-05-06",
+    "version": 1
+  },
+  "skus": [
+    {
+      "brand_id": "northstar-tools",
+      "canonical_url": "https://northstar.example/products/ns-200",
+      "category": "field instruments",
+      "claims": [
+        {
+          "claim": "The product includes a backlit LCD display.",
+          "claim_type": "spec",
+          "confidence": "high",
+          "evidence_ids": [
+            "ev-display"
+          ],
+          "id": "claim-display",
+          "notes": ""
+        }
+      ],
+      "compatibility_notes": "",
+      "evidence": [
+        {
+          "anchor": "display",
+          "captured_at": "",
+          "confidence": "",
+          "excerpt": "Display: backlit LCD.",
+          "file_path": "",
+          "id": "ev-display",
+          "page": "",
+          "section": "Specifications",
+          "source_hash": "manualhash001",
+          "source_type": "manual",
+          "title": "NS 200 User Manual",
+          "url": "https://northstar.example/manuals/ns-200"
+        }
+      ],
+      "facts": {
+        "certifications": [
+          "IEC 61010"
+        ],
+        "compatibility": [
+          "CAT III test leads"
+        ],
+        "dimensions": {},
+        "included_items": [],
+        "key_specs": {
+          "display": "backlit LCD",
+          "measurement_modes": [
+            "AC voltage",
+            "continuity"
+          ]
+        },
+        "materials": [],
+        "ports": [],
+        "positioning": "",
+        "power": [],
+        "protocols": [],
+        "region_availability": [],
+        "requirements": [
+          "Two AA batteries"
+        ],
+        "summary": "A handheld field meter for measuring supported AC circuits.",
+        "warranty": [
+          "Two-year limited warranty"
+        ]
+      },
+      "id": "ns-200",
+      "limitations": [
+        "Extractor-only note should not render."
+      ],
+      "model_number": "NS-200",
+      "not_for": [
+        "Extractor-only exclusion should not render."
+      ],
+      "product_name": "NS 200 Field Meter",
+      "slug": "ns-200-field-meter",
+      "source_urls": [
+        "https://northstar.example/manuals/ns-200"
+      ],
+      "status": "draft",
+      "updated_at": "",
+      "use_cases": [
+        "Extractor-only use case should not render."
+      ]
+    }
+  ]
+}

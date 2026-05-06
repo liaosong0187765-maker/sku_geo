@@ -1,0 +1,81 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@id": "https://northstar.example/#brand",
+      "@type": "Brand",
+      "description": "Manufacturer-owned product facts.",
+      "name": "Northstar Tools",
+      "sameAs": [
+        "https://northstar.example/support"
+      ],
+      "url": "https://northstar.example"
+    },
+    {
+      "@id": "https://northstar.example/sku/ns-200-field-meter-hash200field#product",
+      "@type": "Product",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "display",
+          "value": "backlit LCD"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "measurement_modes",
+          "value": [
+            "AC voltage",
+            "continuity"
+          ]
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Claim: claim-display",
+          "propertyID": "ev-display",
+          "value": "The product includes a backlit LCD display."
+        }
+      ],
+      "brand": {
+        "@id": "https://northstar.example/#brand"
+      },
+      "category": "field instruments",
+      "description": "A handheld field meter for measuring supported AC circuits.",
+      "identifier": "hash200field",
+      "isBasedOn": [
+        "https://northstar.example/products/ns-200",
+        "https://northstar.example/manuals/ns-200",
+        "https://northstar.example/support"
+      ],
+      "model": "NS-200",
+      "name": "NS 200 Field Meter",
+      "url": "https://northstar.example/sku/ns-200-field-meter-hash200field"
+    },
+    {
+      "@id": "https://northstar.example/sku/ns-200-field-meter-hash200field#source-passport",
+      "@type": "WebPage",
+      "citation": "Northstar Tools, \"NS 200 Field Meter,\" SKU Source Passport v1, https://northstar.example/sku/ns-200-field-meter-hash200field",
+      "dateModified": "2026-05-06",
+      "datePublished": "2026-05-06",
+      "mainEntity": {
+        "@id": "https://northstar.example/sku/ns-200-field-meter-hash200field#product"
+      },
+      "name": "NS 200 Field Meter SKU Source Passport",
+      "url": "https://northstar.example/sku/ns-200-field-meter-hash200field",
+      "version": "1"
+    },
+    {
+      "@id": "https://northstar.example/sku/ns-200-field-meter-hash200field#faq",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NS 200 Field Meter is documented as A handheld field meter for measuring supported AC circuits. Relevant facts: CAT III test leads."
+          },
+          "name": "Is the NS 200 compatible with CAT III test leads?"
+        }
+      ]
+    }
+  ]
+}

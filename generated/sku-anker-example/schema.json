@@ -1,0 +1,157 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@id": "https://www.anker.com/#brand",
+      "@type": "Brand",
+      "description": "Official product facts for the selected Anker charger SKU.",
+      "name": "Anker",
+      "sameAs": [
+        "https://www.anker.com/products/a2667",
+        "https://service.anker.com/product-description/a085g000004x2BVAAY",
+        "https://support.anker.com/s/article/A2667-Anker-735-Charger-Nano-II-65W-User-Manual"
+      ],
+      "url": "https://www.anker.com"
+    },
+    {
+      "@id": "https://www.anker.com/sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8#product",
+      "@type": "Product",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "dimensions",
+          "value": "38.26 mm x 29.12 mm x 66.10 mm"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "dual_port_output",
+          "value": "USB-C1 + USB-C2: 45W + 20W; USB-C1 + USB-A: 40W + 22.5W; USB-C2 + USB-A: 12W + 12W"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "input",
+          "value": "100-240V~ 1.8A, 50-60Hz"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "model_number",
+          "value": "A2667"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "ports",
+          "value": "2 USB-C ports and 1 USB-A port"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "single_port_output",
+          "value": "USB-C1 65W max; USB-C2 65W max; USB-A 22.5W max"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "total_output",
+          "value": "65W"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "triple_port_output",
+          "value": "USB-C1 40W; USB-C2 12W; USB-A 12W"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Claim: claim-65w-output",
+          "propertyID": "ev-anker-service-spec",
+          "value": "The charger provides 65W total output with single USB-C port output up to 65W."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Claim: claim-cable-requirements",
+          "propertyID": "ev-anker-introduction",
+          "value": "Lightning devices require a USB-C to Lightning cable and USB-C devices require a USB-C to USB-C cable; cables are sold separately."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Claim: claim-gan-ii-pps",
+          "propertyID": "ev-anker-service-spec, ev-anker-introduction",
+          "value": "The charger is listed by Anker as a GaN II PPS charger with PowerIQ 3.0 and PowerIQ 2.0."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Claim: claim-product-identity",
+          "propertyID": "ev-anker-product-page, ev-anker-user-manual",
+          "value": "Anker 735 Charger (Nano II 65W) is model A2667."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Claim: claim-s22-ultra-limitation",
+          "propertyID": "ev-anker-introduction",
+          "value": "Anker states the charger supports Samsung S22 Ultra Super Fast Charging but not 45W Super Fast Charging 2.0."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Claim: claim-three-ports",
+          "propertyID": "ev-anker-service-spec",
+          "value": "The charger has two USB-C ports and one USB-A port."
+        }
+      ],
+      "brand": {
+        "@id": "https://www.anker.com/#brand"
+      },
+      "category": "USB-C wall chargers",
+      "description": "Anker 735 Charger (Nano II 65W) is a GaN II PPS 3-port 65W foldable wall charger with two USB-C ports and one USB-A port.",
+      "identifier": "e708a9c8c5c8",
+      "isBasedOn": [
+        "https://www.anker.com/products/a2667",
+        "https://service.anker.com/product-description/a085g000004x2BVAAY",
+        "https://service.anker.com/article-description/Introduction-to-Anker-735-Charger-Nano-II-65W?urlName=Introduction-to-Anker-735-Charger-Nano-II-65W",
+        "https://support.anker.com/s/article/A2667-Anker-735-Charger-Nano-II-65W-User-Manual"
+      ],
+      "model": "A2667",
+      "name": "Anker 735 Charger (Nano II 65W)",
+      "url": "https://www.anker.com/sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8"
+    },
+    {
+      "@id": "https://www.anker.com/sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8#source-passport",
+      "@type": "WebPage",
+      "citation": "Anker, \"Anker 735 Charger (Nano II 65W),\" SKU Source Passport v1, https://www.anker.com/sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8",
+      "dateModified": "2026-05-06",
+      "datePublished": "2026-05-06",
+      "mainEntity": {
+        "@id": "https://www.anker.com/sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8#product"
+      },
+      "name": "Anker 735 Charger (Nano II 65W) SKU Source Passport",
+      "url": "https://www.anker.com/sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8",
+      "version": "1"
+    },
+    {
+      "@id": "https://www.anker.com/sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8#faq",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Anker 735 Charger (Nano II 65W) is documented as Anker 735 Charger (Nano II 65W) is a GaN II PPS 3-port 65W foldable wall charger with two USB-C ports and one USB-A port. Relevant facts: Samsung S22 Ultra supports Super Fast Charging with this charger, but not 45W Super Fast Charging 2.0.; Charging speed depends on device input limits and cable capability.; Cables are sold separately.. Relevant limitations: Samsung S22 Ultra supports Super Fast Charging with this charger, but not 45W Super Fast Charging 2.0.."
+          },
+          "name": "Does Anker 735 Charger support Samsung S22 Ultra 45W Super Fast Charging 2.0?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Anker 735 Charger (Nano II 65W) is documented as Anker 735 Charger (Nano II 65W) is a GaN II PPS 3-port 65W foldable wall charger with two USB-C ports and one USB-A port. Relevant facts: USB-C1 single-port output up to 65W; USB-C2 single-port output up to 65W."
+          },
+          "name": "Can Anker 735 Charger provide up to 65W from one USB-C port?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Anker 735 Charger (Nano II 65W) is documented as Anker 735 Charger (Nano II 65W) is a GaN II PPS 3-port 65W foldable wall charger with two USB-C ports and one USB-A port. Relevant facts: Three-port output allocation: 40W, 12W, and 12W. Relevant limitations: Charging speed depends on device input limits and cable capability.."
+          },
+          "name": "What output should a buyer expect when charging three devices with Anker 735 Charger?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "revision_suggestions": [
+    {
+      "action": "Add a compact citation block near the SKU answer section that repeats https://www.anker.com/sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8 and source hash e708a9c8c5c8.",
+      "claim_ids": [],
+      "created_at": "2026-05-06",
+      "evidence_ids": [],
+      "id": "sample-run-anker-missing-citation-q-single-usbc-65w-546f739ded48-missing-citation",
+      "reason": "The answer did not cite the canonical SKU URL and source hash.",
+      "retrieval_run_id": "sample-run-anker-missing-citation",
+      "severity": "high",
+      "sku_ids": [
+        "anker-735-charger-nano-ii-65w-a2667"
+      ],
+      "source": "retrieval_run",
+      "status": "open",
+      "target": "source_page"
+    },
+    {
+      "action": "Add a compact citation block near the SKU answer section that repeats https://www.anker.com/sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8 and source hash e708a9c8c5c8.",
+      "claim_ids": [],
+      "created_at": "2026-05-06",
+      "evidence_ids": [],
+      "id": "sample-run-anker-wrong-s22-limitation-q-samsung-s22-ultra-limitation-27708ece5163-missing-citation",
+      "reason": "The answer did not cite the canonical SKU URL and source hash.",
+      "retrieval_run_id": "sample-run-anker-wrong-s22-limitation",
+      "severity": "high",
+      "sku_ids": [
+        "anker-735-charger-nano-ii-65w-a2667"
+      ],
+      "source": "retrieval_run",
+      "status": "open",
+      "target": "source_page"
+    },
+    {
+      "action": "Restate claim claim-cable-requirements in a direct buying-question answer and keep its evidence IDs visible.",
+      "claim_ids": [
+        "claim-cable-requirements"
+      ],
+      "created_at": "2026-05-06",
+      "evidence_ids": [
+        "ev-anker-introduction"
+      ],
+      "id": "sample-run-anker-wrong-s22-limitation-q-samsung-s22-ultra-limitation-27708ece5163-missing-claim-claim-cable-requirements",
+      "reason": "The answer missed claim claim-cable-requirements.",
+      "retrieval_run_id": "sample-run-anker-wrong-s22-limitation",
+      "severity": "medium",
+      "sku_ids": [
+        "anker-735-charger-nano-ii-65w-a2667"
+      ],
+      "source": "retrieval_run",
+      "status": "open",
+      "target": "claim"
+    },
+    {
+      "action": "Make the contradicted spec labels and evidence excerpts more explicit in the SKU markdown asset.",
+      "claim_ids": [],
+      "created_at": "2026-05-06",
+      "evidence_ids": [
+        "ev-anker-introduction",
+        "ev-anker-product-page",
+        "ev-anker-service-spec",
+        "ev-anker-user-manual"
+      ],
+      "id": "sample-run-anker-wrong-s22-limitation-q-samsung-s22-ultra-limitation-27708ece5163-wrong-specs",
+      "reason": "The answer appears to include specs that conflict with the SKU facts.",
+      "retrieval_run_id": "sample-run-anker-wrong-s22-limitation",
+      "severity": "high",
+      "sku_ids": [
+        "anker-735-charger-nano-ii-65w-a2667"
+      ],
+      "source": "retrieval_run",
+      "status": "open",
+      "target": "evidence"
+    }
+  ]
+}

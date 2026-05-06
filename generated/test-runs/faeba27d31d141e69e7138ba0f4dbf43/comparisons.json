@@ -1,0 +1,22 @@
+{
+  "canonical_url": "https://northstar.example/sku/ns-200-field-meter-hash200field",
+  "category": "field instruments",
+  "items": [
+    {
+      "avoid_claims": [
+        "Do not claim lower price."
+      ],
+      "basis": "Both are handheld field meters.",
+      "comparison_points": [
+        "Display type",
+        "Supported test leads"
+      ],
+      "context_id": "ctx-meter",
+      "known_differences": [
+        "NS 200 compatibility lists CAT III test leads."
+      ],
+      "title": "NS 200 Field Meter vs FG 10 Meter"
+    }
+  ],
+  "product": "NS 200 Field Meter"
+}

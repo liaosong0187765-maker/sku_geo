@@ -1,0 +1,24 @@
+# Anker Product Source Pack
+
+Official product facts for the selected Anker charger SKU.
+
+## Canonical Product Sources
+- Anker 735 Charger (Nano II 65W): https://www.anker.com/sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8
+  - Markdown: /sku/anker-735-charger-nano-ii-65w-a2667-e708a9c8c5c8.md
+  - Product URL: https://www.anker.com/products/a2667
+  - Content hash: e708a9c8c5c8
+
+## AI-Readable Files
+- /ai/product-index.md
+- /ai/products/anker-735-charger-nano-ii-65w-a2667.md
+- /ai/categories/usb-c-wall-chargers.md
+- /ai/comparisons/usb-c-wall-chargers.md
+- /ai/faq.md
+- /ai/buying-guide.md
+- /llms-full.txt
+- /schema.json
+
+## Buyer Retrieval Questions
+- Can Anker 735 Charger provide up to 65W from one USB-C port?
+- What output should a buyer expect when charging three devices with Anker 735 Charger?
+- Does Anker 735 Charger support Samsung S22 Ultra 45W Super Fast Charging 2.0?

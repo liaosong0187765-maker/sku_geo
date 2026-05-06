@@ -1,0 +1,56 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://demo.creator-source.local/#creator",
+      "name": "Lin Source Lab",
+      "description": "Lin Source Lab researches how expert creators can make original ideas durable, citeable, and recoverable in AI retrieval systems.",
+      "sameAs": [
+        "https://x.com/linsourcelab",
+        "https://www.linkedin.com/company/lin-source-lab"
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://demo.creator-source.local/s/durable-source-page-a2957905adc9#source-passport",
+      "mainEntityOfPage": "https://demo.creator-source.local/s/durable-source-page-a2957905adc9",
+      "headline": "A serious idea needs a source page before it needs more posts",
+      "abstract": "Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.",
+      "author": {
+        "@id": "https://demo.creator-source.local/#creator"
+      },
+      "datePublished": "2026-04-26",
+      "dateModified": "2026-04-26",
+      "version": "1",
+      "identifier": "a2957905adc9",
+      "url": "https://demo.creator-source.local/s/durable-source-page-a2957905adc9",
+      "citation": "Lin Source Lab, \"A serious idea needs a source page before it needs more posts,\" Source Passport v1, https://demo.creator-source.local/s/durable-source-page",
+      "about": [
+        "AI retrieval",
+        "content provenance",
+        "creator source authority"
+      ],
+      "isBasedOn": [
+        "https://demo.creator-source.local/ai/index.md"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Lin Source Lab",
+          "item": "https://demo.creator-source.local"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "A serious idea needs a source page before it needs more posts",
+          "item": "https://demo.creator-source.local/s/durable-source-page-a2957905adc9"
+        }
+      ]
+    }
+  ]
+}

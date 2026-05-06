@@ -1,0 +1,82 @@
+{
+  "creator": {
+    "id": "lin-source-lab",
+    "name": "Lin Source Lab",
+    "bio": "Lin Source Lab researches how expert creators can make original ideas durable, citeable, and recoverable in AI retrieval systems.",
+    "domain": "https://demo.creator-source.local",
+    "topics": [
+      "AI retrieval",
+      "content provenance",
+      "creator source authority"
+    ],
+    "social_profiles": {
+      "x": "https://x.com/linsourcelab",
+      "linkedin": "https://www.linkedin.com/company/lin-source-lab"
+    }
+  },
+  "source": {
+    "slug": "durable-source-page",
+    "title": "A serious idea needs a source page before it needs more posts",
+    "thesis": "Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.",
+    "body": "Most expert posts are optimized for feeds. Feeds are good for reach, but weak for memory. A useful idea needs a stable source URL, a clear author, a version, evidence, limitations, and a machine-readable summary.\n\nA Source Passport makes the original idea durable before it gets remixed across X, LinkedIn, WeChat, and Zhihu. The platform posts become distribution copies, not the root source.\n\nThis matters for AI retrieval because answer engines need stable pages with clear claims, supporting evidence, and citation hints. If the idea only lives inside short social posts, AI systems may summarize it without attribution or cite a copied version instead of the creator.\n\nThe practical workflow is simple:\n\n- Write the original idea once.\n- Generate the canonical source page and AI markdown pack.\n- Generate platform variants with the same source anchor.\n- Save manual publish URLs after posting.\n- Monitor whether AI responses cite the source URL or merely mention the topic.\n- Revise the source when AI fails to understand or attribute it.",
+    "created_at": "2026-04-26",
+    "updated_at": "2026-04-26",
+    "canonical_url": "http://127.0.0.1:8765/s/durable-source-page-a2957905adc9",
+    "canonical_path": "/s/durable-source-page-a2957905adc9",
+    "markdown_path": "/s/durable-source-page-a2957905adc9.md",
+    "content_hash": "a2957905adc9",
+    "version": 1,
+    "topics": [
+      "AI retrieval",
+      "content provenance",
+      "creator source authority"
+    ],
+    "claims": [
+      {
+        "claim": "A canonical source page is more durable than a platform post.",
+        "evidence": "The source page has a stable URL, version, hash, schema, sitemap entry, and AI-readable markdown.",
+        "reference_url": "https://demo.creator-source.local/ai/index.md",
+        "confidence": "high"
+      },
+      {
+        "claim": "Platform variants should distribute the idea without becoming the root citation target.",
+        "evidence": "Each variant includes the same visible source anchor pointing back to the canonical URL.",
+        "reference_url": "https://demo.creator-source.local/s/durable-source-page",
+        "confidence": "high"
+      },
+      {
+        "claim": "AI retrieval monitoring should score recoverability, not vanity traffic.",
+        "evidence": "The monitor checks whether a response names the creator, cites the canonical URL, mentions the hash, and preserves the claim-evidence map.",
+        "reference_url": "https://demo.creator-source.local/monitor/report.md",
+        "confidence": "medium"
+      }
+    ],
+    "evidence": [
+      "The MVP generates canonical HTML and markdown from the same Source Passport object.",
+      "The MVP generates X, LinkedIn, WeChat, and Zhihu drafts with visible source anchors.",
+      "The MVP records manual publication URLs and compares monitor responses against the canonical URL."
+    ],
+    "references": [
+      {
+        "title": "Source Passport MVP project context",
+        "url": "https://demo.creator-source.local/ai/index.md"
+      }
+    ],
+    "limitations": [
+      "AI citation cannot be guaranteed by source markup alone.",
+      "Closed social platforms may hide or rewrite source links.",
+      "The first monitor is a local response analyzer, not a live AI search integration."
+    ],
+    "related_sources": [
+      "How source anchors should survive platform distribution",
+      "Why llms.txt is a routing hint, not a ranking guarantee"
+    ],
+    "recommended_citation": "Lin Source Lab, \"A serious idea needs a source page before it needs more posts,\" Source Passport v1, http://127.0.0.1:8765/s/durable-source-page-a2957905adc9",
+    "source_anchor": "Source Passport: a2957905adc9\nSource: http://127.0.0.1:8765/s/durable-source-page-a2957905adc9"
+  },
+  "monitor_prompts": [
+    "Who argued that serious creator ideas need canonical source pages before more platform posts?",
+    "What is a Source Passport for AI retrieval?",
+    "How should creators make ideas citeable across X, LinkedIn, WeChat, and Zhihu?"
+  ]
+}

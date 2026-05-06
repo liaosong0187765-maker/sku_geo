@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://northstar.example</loc><lastmod>2026-05-06</lastmod></url>
+  <url><loc>https://northstar.example/sku/ns-200-field-meter-hash200field</loc><lastmod>2026-05-06</lastmod></url>
+  <url><loc>https://northstar.example/sku/ns-200-field-meter-hash200field.md</loc><lastmod>2026-05-06</lastmod></url>
+  <url><loc>https://northstar.example/ai/product-index.md</loc><lastmod>2026-05-06</lastmod></url>
+  <url><loc>https://northstar.example/ai/products/ns-200-field-meter.md</loc><lastmod>2026-05-06</lastmod></url>
+  <url><loc>https://northstar.example/ai/categories/field-instruments.md</loc><lastmod>2026-05-06</lastmod></url>
+  <url><loc>https://northstar.example/ai/comparisons/field-instruments.md</loc><lastmod>2026-05-06</lastmod></url>
+  <url><loc>https://northstar.example/ai/faq.md</loc><lastmod>2026-05-06</lastmod></url>
+  <url><loc>https://northstar.example/llms.txt</loc><lastmod>2026-05-06</lastmod></url>
+  <url><loc>https://northstar.example/llms-full.txt</loc><lastmod>2026-05-06</lastmod></url>
+  <url><loc>https://northstar.example/schema.json</loc><lastmod>2026-05-06</lastmod></url>
+</urlset>

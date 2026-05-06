@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-05-06T03:30:46.101903+00:00",
+  "canonical_url": "https://demo.creator-source.local/s/durable-source-page-a2957905adc9",
+  "content_hash": "a2957905adc9",
+  "response": "Professional creators should keep durable pages for their ideas instead of relying only on social posts. The idea is that a source page gives AI systems more structure than a short post, and then social platforms can be used for distribution.\n\n",
+  "result": {
+    "prompt": "Who argued that serious creator ideas need canonical source pages before more platform posts?",
+    "creator_mentioned": false,
+    "source_url_cited": false,
+    "content_hash_mentioned": false,
+    "platform_url_cited": false,
+    "claim_coverage": 0.0,
+    "matched_claims": [],
+    "missing_claims": [
+      "A canonical source page is more durable than a platform post.",
+      "Platform variants should distribute the idea without becoming the root citation target.",
+      "AI retrieval monitoring should score recoverability, not vanity traffic."
+    ],
+    "attribution_score": 0,
+    "misunderstanding_notes": [
+      "The response does not cite the canonical source URL.",
+      "The response does not mention the creator/entity.",
+      "The response misses most of the claim-evidence map."
+    ],
+    "revision_suggestions": [
+      "Add a direct citation block near the first screen: title, creator, canonical URL, and content hash.",
+      "Move the visible source anchor into both the opening and closing sections of every platform variant.",
+      "Repeat the creator name in the title area, schema author, and AI profile summary.",
+      "Add an FAQ section that restates the top claims as direct question-answer blocks.",
+      "Strengthen each claim with a concrete evidence sentence and reference URL.",
+      "Keep limitations visible so AI systems do not overgeneralize the source."
+    ]
+  }
+}

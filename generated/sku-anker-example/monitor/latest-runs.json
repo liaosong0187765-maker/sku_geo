@@ -1,0 +1,62 @@
+{
+  "retrieval_runs": [
+    {
+      "brand_mentioned": true,
+      "buying_intent_matched": false,
+      "canonical_url_cited": false,
+      "claim_coverage": {
+        "claim-65w-output": "partial",
+        "claim-cable-requirements": "partial",
+        "claim-gan-ii-pps": "partial",
+        "claim-product-identity": "partial",
+        "claim-s22-ultra-limitation": "partial",
+        "claim-three-ports": "partial"
+      },
+      "competitor_context_present": false,
+      "id": "sample-run-anker-missing-citation",
+      "limitations_preserved": false,
+      "model": "",
+      "notes": "Missing canonical SKU source URL citation. Missing SKU source or evidence hash citation. Buying intent was not matched.",
+      "provider": "manual-fixture",
+      "question_id": "q-single-usbc-65w",
+      "ran_at": "2026-05-06",
+      "response_text": "Anker 735 Charger can provide up to 65W from a USB-C port, but this answer does not cite the canonical source page or source hash.",
+      "score": 35,
+      "sku_ids": [
+        "anker-735-charger-nano-ii-65w-a2667"
+      ],
+      "sku_mentioned": false,
+      "source_hash_cited": false,
+      "wrong_specs_present": false
+    },
+    {
+      "brand_mentioned": true,
+      "buying_intent_matched": true,
+      "canonical_url_cited": false,
+      "claim_coverage": {
+        "claim-65w-output": "partial",
+        "claim-cable-requirements": "missing",
+        "claim-gan-ii-pps": "partial",
+        "claim-product-identity": "partial",
+        "claim-s22-ultra-limitation": "covered",
+        "claim-three-ports": "partial"
+      },
+      "competitor_context_present": false,
+      "id": "sample-run-anker-wrong-s22-limitation",
+      "limitations_preserved": true,
+      "model": "",
+      "notes": "Missing canonical SKU source URL citation. Missing SKU source or evidence hash citation. Missing claim coverage: claim-cable-requirements. Possible wrong specs: ports.",
+      "provider": "manual-fixture",
+      "question_id": "q-samsung-s22-ultra-limitation",
+      "ran_at": "2026-05-06",
+      "response_text": "Anker 735 Charger supports Samsung S22 Ultra 45W Super Fast Charging 2.0.",
+      "score": 25,
+      "sku_ids": [
+        "anker-735-charger-nano-ii-65w-a2667"
+      ],
+      "sku_mentioned": false,
+      "source_hash_cited": false,
+      "wrong_specs_present": true
+    }
+  ]
+}

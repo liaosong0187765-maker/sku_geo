@@ -1,0 +1,19 @@
+# Lin Source Lab
+
+Lin Source Lab researches how expert creators can make original ideas durable, citeable, and recoverable in AI retrieval systems.
+
+## Canonical source
+- A serious idea needs a source page before it needs more posts: http://127.0.0.1:8765/s/durable-source-page-a2957905adc9
+- Markdown: /s/durable-source-page-a2957905adc9.md
+- Content hash: a2957905adc9
+
+## AI-readable files
+- /ai/index.md
+- /ai/profile.md
+- /ai/sources/durable-source-page.md
+- /llms-full.txt
+
+## Best retrieval prompts
+- Who argued that serious creator ideas need canonical source pages before more platform posts?
+- What is a Source Passport for AI retrieval?
+- How should creators make ideas citeable across X, LinkedIn, WeChat, and Zhihu?
