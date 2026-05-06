@@ -1,0 +1,24 @@
+{
+  "retrieval_runs": [
+    {
+      "id": "sample-run-anker-missing-citation",
+      "question_id": "q-single-usbc-65w",
+      "ran_at": "2026-05-06",
+      "provider": "manual-fixture",
+      "sku_ids": [
+        "anker-735-charger-nano-ii-65w-a2667"
+      ],
+      "response_text": "Anker 735 Charger can provide up to 65W from a USB-C port, but this answer does not cite the canonical source page or source hash."
+    },
+    {
+      "id": "sample-run-anker-wrong-s22-limitation",
+      "question_id": "q-samsung-s22-ultra-limitation",
+      "ran_at": "2026-05-06",
+      "provider": "manual-fixture",
+      "sku_ids": [
+        "anker-735-charger-nano-ii-65w-a2667"
+      ],
+      "response_text": "Anker 735 Charger supports Samsung S22 Ultra 45W Super Fast Charging 2.0."
+    }
+  ]
+}

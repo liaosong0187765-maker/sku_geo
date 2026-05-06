@@ -1,0 +1,13 @@
+{
+  "publications": [
+    {
+      "platform": "x",
+      "platform_url": "https://x.com/example/status/123",
+      "published_at": "2026-05-06T11:06:30.807436+00:00",
+      "method": "manual",
+      "canonical_url": "https://demo.creator-source.local/s/durable-source-page-a2957905adc9",
+      "anchor_present": true,
+      "status": "published_manually"
+    }
+  ]
+}

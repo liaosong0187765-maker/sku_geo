@@ -1,0 +1,228 @@
+{
+  "contract_version": "sku-source-passport-assets-v1",
+  "asset_type": "sku_source_input_template",
+  "scope": {
+    "purpose": "Capture evidence-backed product facts for a reusable SKU Source Passport delivery.",
+    "target_sku_count": "3-5",
+    "allowed_sources": [
+      "official_product_page",
+      "official_support_page",
+      "official_manual",
+      "official_faq",
+      "official_certification",
+      "approved_human_note"
+    ],
+    "excluded_fields": [
+      "price",
+      "inventory",
+      "ratings",
+      "reviews",
+      "promotions",
+      "rankings"
+    ],
+    "rules": [
+      "Use official or customer-approved evidence only.",
+      "Every claim must reference at least one evidence id.",
+      "Omit unknown facts instead of guessing.",
+      "Do not include price, inventory, ratings, reviews, promotions, or rankings."
+    ]
+  },
+  "brand": {
+    "id": "[brand-id]",
+    "name": "[Brand Name]",
+    "domain": "https://[approved-brand-domain]",
+    "market": "[primary-market-or-locale]",
+    "official_urls": [
+      "https://[approved-brand-domain]",
+      "https://[approved-brand-domain]/support"
+    ],
+    "description": "Short factual brand description approved by the customer."
+  },
+  "skus": [
+    {
+      "id": "[sku-1-id]",
+      "brand_id": "[brand-id]",
+      "product_name": "[SKU 1 Product Name]",
+      "category": "[Category Name]",
+      "canonical_url": "https://[approved-brand-domain]/products/[sku-1-slug]",
+      "model_number": "[SKU-1-MODEL-NUMBER]",
+      "status": "draft",
+      "source_urls": [
+        "https://[approved-brand-domain]/products/[sku-1-slug]",
+        "https://[approved-brand-domain]/support/[sku-1-slug]"
+      ],
+      "facts": {
+        "summary": "One or two factual sentences describing what [SKU 1 Product Name] is.",
+        "positioning": "Factual positioning based on official materials.",
+        "key_specs": {
+          "spec_name": "spec value from official evidence"
+        },
+        "compatibility": [
+          "Supported device, system, environment, accessory, or standard."
+        ],
+        "requirements": [
+          "Required setup condition, accessory, software, host device, or environment."
+        ],
+        "certifications": [
+          "Official certification or compliance mark."
+        ],
+        "included_items": [
+          "Box content or included component."
+        ]
+      },
+      "limitations": [
+        "Evidence-backed limitation, exclusion, or caveat."
+      ],
+      "use_cases": [
+        "Recommended usage scenario supported by evidence."
+      ],
+      "not_for": [
+        "Scenario where this SKU should not be recommended."
+      ],
+      "claims": [
+        {
+          "id": "claim-alpha-identity",
+          "claim": "[SKU 1 Product Name] has a verified product identity and model number.",
+          "claim_type": "spec",
+          "confidence": "high",
+          "evidence_ids": [
+            "ev-sku-1-product-page"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-sku-1-product-page",
+          "source_type": "official_page",
+          "title": "Official [SKU 1 Product Name] page",
+          "excerpt": "Short supporting excerpt or normalized fact.",
+          "url": "https://[approved-brand-domain]/products/[sku-1-slug]",
+          "captured_at": "YYYY-MM-DD",
+          "section": "Product identity"
+        }
+      ]
+    },
+    {
+      "id": "[sku-2-id]",
+      "brand_id": "[brand-id]",
+      "product_name": "[SKU 2 Product Name]",
+      "category": "[Category Name]",
+      "canonical_url": "https://[approved-brand-domain]/products/[sku-2-slug]",
+      "model_number": "[SKU-2-MODEL-NUMBER]",
+      "status": "draft",
+      "source_urls": [
+        "https://[approved-brand-domain]/products/[sku-2-slug]",
+        "https://[approved-brand-domain]/support/[sku-2-slug]"
+      ],
+      "facts": {
+        "summary": "One or two factual sentences describing what [SKU 2 Product Name] is.",
+        "positioning": "Factual positioning based on official materials.",
+        "key_specs": {
+          "spec_name": "spec value from official evidence"
+        }
+      },
+      "limitations": [
+        "Evidence-backed limitation, exclusion, or caveat."
+      ],
+      "use_cases": [
+        "Recommended usage scenario supported by evidence."
+      ],
+      "not_for": [
+        "Scenario where this SKU should not be recommended."
+      ],
+      "claims": [
+        {
+          "id": "claim-sku-2-identity",
+          "claim": "[SKU 2 Product Name] has a verified product identity and model number.",
+          "claim_type": "spec",
+          "confidence": "high",
+          "evidence_ids": [
+            "ev-sku-2-product-page"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-sku-2-product-page",
+          "source_type": "official_page",
+          "title": "Official [SKU 2 Product Name] page",
+          "excerpt": "Short supporting excerpt or normalized fact.",
+          "url": "https://[approved-brand-domain]/products/[sku-2-slug]",
+          "captured_at": "YYYY-MM-DD",
+          "section": "Product identity"
+        }
+      ]
+    },
+    {
+      "id": "[sku-3-id]",
+      "brand_id": "[brand-id]",
+      "product_name": "[SKU 3 Product Name]",
+      "category": "[Category Name]",
+      "canonical_url": "https://[approved-brand-domain]/products/[sku-3-slug]",
+      "model_number": "[SKU-3-MODEL-NUMBER]",
+      "status": "draft",
+      "source_urls": [
+        "https://[approved-brand-domain]/products/[sku-3-slug]",
+        "https://[approved-brand-domain]/support/[sku-3-slug]"
+      ],
+      "facts": {
+        "summary": "One or two factual sentences describing what [SKU 3 Product Name] is.",
+        "positioning": "Factual positioning based on official materials.",
+        "key_specs": {
+          "spec_name": "spec value from official evidence"
+        }
+      },
+      "limitations": [
+        "Evidence-backed limitation, exclusion, or caveat."
+      ],
+      "use_cases": [
+        "Recommended usage scenario supported by evidence."
+      ],
+      "not_for": [
+        "Scenario where this SKU should not be recommended."
+      ],
+      "claims": [
+        {
+          "id": "claim-sku-3-identity",
+          "claim": "[SKU 3 Product Name] has a verified product identity and model number.",
+          "claim_type": "spec",
+          "confidence": "high",
+          "evidence_ids": [
+            "ev-sku-3-product-page"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-sku-3-product-page",
+          "source_type": "official_page",
+          "title": "Official [SKU 3 Product Name] page",
+          "excerpt": "Short supporting excerpt or normalized fact.",
+          "url": "https://[approved-brand-domain]/products/[sku-3-slug]",
+          "captured_at": "YYYY-MM-DD",
+          "section": "Product identity"
+        }
+      ]
+    }
+  ],
+  "competitor_context": [
+    {
+      "id": "context-category-alternative",
+      "category": "Category Name",
+      "competitor_name": "Alternative Brand Or Product Line",
+      "basis": "Why buyers compare this alternative with the selected SKUs.",
+      "comparison_points": [
+        "Evidence-backed product dimension to compare."
+      ],
+      "known_differences": [
+        "Factual difference supported by customer-approved evidence."
+      ],
+      "avoid_claims": [
+        "Claims that must not be made without stronger evidence."
+      ]
+    }
+  ],
+  "buying_questions": [],
+  "retrieval_runs": [],
+  "revision_suggestions": []
+}

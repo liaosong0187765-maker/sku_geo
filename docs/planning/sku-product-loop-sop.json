@@ -1,0 +1,141 @@
+{
+  "name": "SKU Source Passport product loop SOP",
+  "status": "repeatable-local-workflow",
+  "updated_at": "2026-05-06",
+  "scope": {
+    "goal": "Turn selected ecommerce SKUs into AI-readable product source packs, human review artifacts, retrieval monitor reports, and revision suggestions.",
+    "allowed": [
+      "structured SKU JSON input",
+      "official product/support/manual evidence",
+      "human review checkpoint",
+      "static source pack generation",
+      "offline retrieval run evaluation",
+      "revision suggestions"
+    ],
+    "excluded": [
+      "price",
+      "inventory",
+      "discounts",
+      "ratings",
+      "reviews",
+      "marketplace ranking",
+      "CMS",
+      "publisher bot",
+      "social scheduler",
+      "crawler-first workflow",
+      "hardcoded brand logic"
+    ]
+  },
+  "sku_selection": {
+    "minimum_skus_per_brand": 3,
+    "target_skus_per_brand": "3-5",
+    "criteria": [
+      "Official product page exists",
+      "Official support/manual page exists",
+      "Specs are explicit enough to create evidence-backed claims",
+      "Buying questions can be expressed without price or inventory",
+      "Limitations or compatibility boundaries are explicit"
+    ],
+    "selection_record_template": {
+      "brand": "[customer-brand-name]",
+      "sku": "[selected-sku-name]",
+      "model_number": "[model-number-if-applicable]",
+      "reason": "[why official evidence and buyer questions make this SKU delivery-ready]",
+      "official_sources": [
+        "[official-product-url]",
+        "[official-support-or-manual-url]"
+      ]
+    }
+  },
+  "reusable_assets": {
+    "directory": "docs/assets",
+    "minimum_delivery_pack": [
+      "docs/assets/README.md",
+      "docs/assets/delivery-sop.md",
+      "docs/assets/sku-source-template.json",
+      "docs/assets/sku-source-field-dictionary.md",
+      "docs/assets/sku-selection-scorecard.json",
+      "docs/assets/claim-evidence-map-template.json",
+      "docs/assets/buying-question-bank-template.json",
+      "docs/assets/source-page-section-template.md",
+      "docs/assets/source-pack-manifest-template.json",
+      "docs/assets/retrieval-runs-template.json",
+      "docs/assets/revision-suggestion-template.json",
+      "docs/assets/human-review-checklist.md",
+      "docs/assets/customer-handoff-template.md",
+      "docs/assets/delivery-asset-index.json"
+    ],
+    "rule": "Assets must stay brand-neutral. Real brands belong in customer workspaces or examples only, never in reusable templates."
+  },
+  "input_contract": {
+    "primary_file": "sku-source.json",
+    "required_sections": [
+      "brand",
+      "skus"
+    ],
+    "recommended_sections": [
+      "buying_questions",
+      "retrieval_runs"
+    ],
+    "claim_rule": "Every ProductClaim must reference at least one Evidence.id.",
+    "unknown_fact_rule": "Omit unknown facts instead of guessing."
+  },
+  "commands": [
+    {
+      "step": "build",
+      "command": "python -m creator_passport sku-build path\\\\to\\\\customer\\\\sku-source.json --out generated\\\\customer-sku-source-pack --runs path\\\\to\\\\customer\\\\retrieval-runs.json",
+      "writes": [
+        "sku-passport.json",
+        "index.html",
+        "sku-review.json",
+        "sku-review.md",
+        "ai/product-index.md",
+        "llms.txt",
+        "schema.json",
+        "sitemap.xml",
+        "robots.txt",
+        "llms-full.txt",
+        "faq.json",
+        "comparisons.json",
+        "sku/{sku-slug}-{source-hash}/index.html",
+        "sku/{sku-slug}-{source-hash}.md",
+        "ai/products/{sku-slug}.md",
+        "ai/categories/{category-slug}.md",
+        "ai/comparisons/{category-slug}.md",
+        "ai/faq.md",
+        "ai/buying-guide.md",
+        "monitor/latest-runs.json",
+        "monitor/report.md",
+        "revision_suggestions.json",
+        "revision_suggestions.md"
+      ]
+    },
+    {
+      "step": "review",
+      "command": "python -m creator_passport sku-review --input path\\\\to\\\\customer\\\\sku-source.json --out generated\\\\customer-sku-source-pack",
+      "pass_condition": "Review artifact has no error severity issues. Draft status warnings require human approval before publication."
+    },
+    {
+      "step": "check",
+      "command": "python -m creator_passport sku-check generated\\\\customer-sku-source-pack",
+      "pass_condition": "All required SKU source pack artifacts exist."
+    },
+    {
+      "step": "monitor_batch",
+      "command": "python -m creator_passport sku-monitor-batch path\\\\to\\\\customer\\\\sku-source.json --out generated\\\\customer-sku-source-pack --runs path\\\\to\\\\customer\\\\retrieval-runs.json",
+      "pass_condition": "Each run maps to a known question_id and SKU id, with actionable revision suggestions when retrieval signals are missing or wrong."
+    }
+  ],
+  "review_gates": [
+    "No brand-specific logic in src/",
+    "No demo or placeholder facts in the selected SKU JSON",
+    "No price, inventory, discount, rating, review count, or ranking fields in source input",
+    "Every generated source page has a canonical URL and source hash",
+    "Creator Source Passport workflow tests still pass"
+  ],
+  "verification_commands": [
+    "python -m unittest tests.test_sku_cli tests.test_sku_render tests.test_sku_monitor tests.test_workflow",
+    "python -m unittest discover tests",
+    "python -m compileall src tests"
+  ]
+}

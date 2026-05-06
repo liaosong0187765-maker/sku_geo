@@ -1,0 +1,115 @@
+{
+  "template_name": "delivery-asset-index",
+  "version": "1.0",
+  "scope": "Reusable checklist for assembling a complete SKU Source Passport delivery package for different customers and SKUs.",
+  "asset_groups": [
+    {
+      "group": "intake",
+      "purpose": "Collect brand-owned SKU facts and approved source material.",
+      "assets": [
+        {
+          "path": "docs/assets/sku-source-template.json",
+          "required": true,
+          "owner": "delivery",
+          "output": "Customer-specific source input JSON"
+        },
+        {
+          "path": "docs/assets/sku-source-field-dictionary.md",
+          "required": true,
+          "owner": "delivery",
+          "output": "Field-by-field collection guidance"
+        },
+        {
+          "path": "docs/assets/sku-selection-scorecard.json",
+          "required": true,
+          "owner": "strategy",
+          "output": "Selected 3-5 SKUs with evidence readiness notes"
+        }
+      ]
+    },
+    {
+      "group": "grounding",
+      "purpose": "Convert SKU facts into evidence-backed claims and buyer questions.",
+      "assets": [
+        {
+          "path": "docs/assets/claim-evidence-map-template.json",
+          "required": true,
+          "owner": "delivery",
+          "output": "Claim-to-evidence matrix"
+        },
+        {
+          "path": "docs/assets/buying-question-bank-template.json",
+          "required": true,
+          "owner": "delivery",
+          "output": "Buyer question set for FAQ, variants, and monitor prompts"
+        },
+        {
+          "path": "docs/assets/source-page-section-template.md",
+          "required": true,
+          "owner": "delivery",
+          "output": "Canonical source page section draft"
+        },
+        {
+          "path": "docs/assets/source-pack-manifest-template.json",
+          "required": true,
+          "owner": "delivery",
+          "output": "Manifest of generated source pack artifacts, source hashes, and review state"
+        }
+      ]
+    },
+    {
+      "group": "review",
+      "purpose": "Force human approval before publishing or monitoring.",
+      "assets": [
+        {
+          "path": "docs/assets/human-review-checklist.md",
+          "required": true,
+          "owner": "reviewer",
+          "output": "Approved, rejected, or needs-revision decisions"
+        },
+        {
+          "path": "docs/assets/customer-handoff-template.md",
+          "required": true,
+          "owner": "delivery",
+          "output": "Customer-facing source pack handoff"
+        }
+      ]
+    },
+    {
+      "group": "maintenance",
+      "purpose": "Evaluate AI retrieval answers and convert failures into source revisions.",
+      "assets": [
+        {
+          "path": "docs/assets/retrieval-runs-template.json",
+          "required": true,
+          "owner": "monitor",
+          "output": "Offline retrieval run input or captured result set"
+        },
+        {
+          "path": "docs/assets/revision-suggestion-template.json",
+          "required": true,
+          "owner": "monitor",
+          "output": "Actionable maintenance backlog"
+        }
+      ]
+    }
+  ],
+  "delivery_rules": [
+    "Keep templates brand-neutral and customer-reusable.",
+    "Use official or customer-approved evidence for every publishable claim.",
+    "Omit unknown facts instead of guessing.",
+    "Keep price, inventory, discounts, promotions, ratings, reviews, sales volume, and marketplace ranking out of core assets.",
+    "Keep social publishing and CMS workflow outside the SKU Source Passport MVP.",
+    "Regenerate source hash after approved revisions."
+  ],
+  "minimum_done_definition": [
+    "SKU selection scorecard is complete.",
+    "Source input JSON validates against the documented contract.",
+    "Every ProductClaim references Evidence.id.",
+    "Canonical source page sections preserve facts, limitations, evidence ids, and citation block.",
+    "Source pack manifest lists canonical page, markdown mirror, llms.txt, sitemap, robots, schema, source hash, review status, and revision suggestions.",
+    "Buying question bank covers choose, compare, compatibility, and limitation intents where relevant.",
+    "Human review checklist has no blocking issues.",
+    "Retrieval run template can record provider response, citation quality, wrong specs, limitation preservation, and revision suggestions."
+  ]
+}

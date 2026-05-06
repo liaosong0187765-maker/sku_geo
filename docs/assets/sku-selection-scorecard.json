@@ -1,0 +1,112 @@
+{
+  "asset_type": "sku_selection_scorecard",
+  "version": "v1",
+  "purpose": "Select the first 3-5 SKUs for a reusable SKU Source Passport delivery.",
+  "excluded_fields": [
+    "price",
+    "inventory",
+    "ratings",
+    "reviews",
+    "promotions",
+    "rankings"
+  ],
+  "selection_policy": {
+    "target_skus": "3-5",
+    "minimum_skus": 3,
+    "maximum_skus": 5,
+    "selection_rule": "Choose the highest-scoring SKUs that have sufficient official evidence and meaningful buying questions.",
+    "disqualification_rules": [
+      "No official or customer-approved canonical product page.",
+      "No evidence for key product facts.",
+      "Buying questions depend on price, inventory, ratings, reviews, promotions, or rankings.",
+      "Customer cannot approve limitations or compatibility boundaries.",
+      "SKU is discontinued or unavailable for source-page maintenance unless explicitly approved as an archive case."
+    ]
+  },
+  "scoring_dimensions": [
+    {
+      "id": "official_evidence_depth",
+      "label": "Official evidence depth",
+      "weight": 25,
+      "score_0": "No usable official source.",
+      "score_3": "One official source with partial facts.",
+      "score_5": "Product, support, manual, FAQ, or certification evidence covers identity, specs, compatibility, and limitations."
+    },
+    {
+      "id": "buying_decision_value",
+      "label": "Buying decision value",
+      "weight": 20,
+      "score_0": "No meaningful buyer decision questions.",
+      "score_3": "Some choice, comparison, or compatibility questions.",
+      "score_5": "Many high-intent questions can be answered without prohibited commerce fields."
+    },
+    {
+      "id": "fact_stability",
+      "label": "Fact stability",
+      "weight": 15,
+      "score_0": "Facts change too frequently for a stable source pack.",
+      "score_3": "Most facts are stable, with some review-needed fields.",
+      "score_5": "Identity, specs, compatibility, requirements, and limitations are stable and source-backed."
+    },
+    {
+      "id": "comparison_clarity",
+      "label": "Comparison clarity",
+      "weight": 15,
+      "score_0": "No clear comparison basis.",
+      "score_3": "Comparison points exist but need human approval.",
+      "score_5": "Clear factual comparison points exist across selected SKUs or approved alternatives."
+    },
+    {
+      "id": "limitation_clarity",
+      "label": "Limitation clarity",
+      "weight": 15,
+      "score_0": "Limitations are unknown or unsupported.",
+      "score_3": "Some limitations are explicit.",
+      "score_5": "Limitations, not-for scenarios, and compatibility boundaries are clear."
+    },
+    {
+      "id": "maintenance_fit",
+      "label": "Weekly maintenance fit",
+      "weight": 10,
+      "score_0": "No measurable retrieval questions.",
+      "score_3": "Weekly monitor can detect brand, SKU, and core fact coverage.",
+      "score_5": "Weekly monitor can detect citation, wrong facts, missing limitations, and weak comparisons."
+    }
+  ],
+  "candidate_sku_template": {
+    "id": "[candidate-sku-id]",
+    "product_name": "[Candidate Product Name]",
+    "category": "[Category Name]",
+    "canonical_url": "https://[approved-brand-domain]/products/[candidate-sku-slug]",
+    "official_sources_available": [
+      "product_page",
+      "support_page",
+      "manual",
+      "faq",
+      "certification"
+    ],
+    "score_by_dimension": {
+      "official_evidence_depth": 0,
+      "buying_decision_value": 0,
+      "fact_stability": 0,
+      "comparison_clarity": 0,
+      "limitation_clarity": 0,
+      "maintenance_fit": 0
+    },
+    "weighted_total": 0,
+    "selection_status": "candidate",
+    "review_notes": "Explain why this SKU should be selected, deferred, or rejected."
+  },
+  "portfolio_output_template": {
+    "brand_id": "[brand-id]",
+    "selected_skus": [
+      "[sku-1-id]",
+      "[sku-2-id]",
+      "[sku-3-id]"
+    ],
+    "deferred_skus": [],
+    "rejected_skus": [],
+    "human_approver": "[Name or role]",
+    "approved_at": "[YYYY-MM-DD]"
+  }
+}

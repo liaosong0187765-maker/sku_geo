@@ -1,0 +1,105 @@
+{
+  "template_name": "revision-suggestion-template",
+  "version": "1.0",
+  "scope": "Reusable structure for turning human review or retrieval monitor failures into source-pack maintenance tasks.",
+  "revision_suggestions": [
+    {
+      "id": "suggestion-missing-canonical-citation",
+      "source": "retrieval_run",
+      "reason": "The AI answer mentioned the product category or SKU but did not cite the canonical source URL.",
+      "target": "source_page",
+      "action": "Add or strengthen the canonical citation block near the relevant buyer question and ensure the markdown mirror includes the same citation.",
+      "severity": "medium",
+      "status": "open",
+      "retrieval_run_id": "run-id",
+      "sku_ids": [
+        "sku-slug"
+      ],
+      "claim_ids": [],
+      "evidence_ids": [],
+      "created_at": "YYYY-MM-DD"
+    },
+    {
+      "id": "suggestion-wrong-spec",
+      "source": "retrieval_run",
+      "reason": "The AI answer included a specification that contradicts an approved evidence-backed claim.",
+      "target": "claim",
+      "action": "Add the contradicted spec to the official facts table, make the claim wording more explicit, and cite the supporting evidence id.",
+      "severity": "high",
+      "status": "open",
+      "retrieval_run_id": "run-id",
+      "sku_ids": [
+        "sku-slug"
+      ],
+      "claim_ids": [
+        "claim-id"
+      ],
+      "evidence_ids": [
+        "evidence-id"
+      ],
+      "created_at": "YYYY-MM-DD"
+    },
+    {
+      "id": "suggestion-missing-limitation",
+      "source": "retrieval_run",
+      "reason": "The AI answer recommended the SKU but omitted a known limitation or compatibility boundary.",
+      "target": "markdown_asset",
+      "action": "Move the limitation into the Not For section, the relevant FAQ answer, and the markdown mirror with direct evidence citation.",
+      "severity": "high",
+      "status": "open",
+      "retrieval_run_id": "run-id",
+      "sku_ids": [
+        "sku-slug"
+      ],
+      "claim_ids": [
+        "claim-limitation"
+      ],
+      "evidence_ids": [
+        "evidence-limitation"
+      ],
+      "created_at": "YYYY-MM-DD"
+    },
+    {
+      "id": "suggestion-weak-comparison-context",
+      "source": "human_review",
+      "reason": "The comparison section does not explain the factual basis for choosing between SKUs or competitor context.",
+      "target": "competitor_context",
+      "action": "Add a neutral comparison point with evidence-backed facts and avoid unsupported superiority language.",
+      "severity": "medium",
+      "status": "open",
+      "retrieval_run_id": null,
+      "sku_ids": [
+        "sku-slug"
+      ],
+      "claim_ids": [],
+      "evidence_ids": [
+        "evidence-id"
+      ],
+      "created_at": "YYYY-MM-DD"
+    },
+    {
+      "id": "suggestion-unsupported-claim",
+      "source": "validation",
+      "reason": "A claim has no evidence id or relies on language that is not directly supported by official sources.",
+      "target": "evidence",
+      "action": "Either attach official evidence, rewrite the claim as a narrower fact, or remove the claim from publishable assets.",
+      "severity": "high",
+      "status": "open",
+      "retrieval_run_id": null,
+      "sku_ids": [
+        "sku-slug"
+      ],
+      "claim_ids": [
+        "claim-id"
+      ],
+      "evidence_ids": [],
+      "created_at": "YYYY-MM-DD"
+    }
+  ],
+  "rules": [
+    "A suggestion must name the affected object and the concrete edit.",
+    "A suggestion must not introduce a new fact without first adding evidence.",
+    "Applied suggestions should result in a new source hash or documented revision.",
+    "Do not create suggestions that add price, inventory, discounts, ratings, reviews, promotions, or rankings."
+  ]
+}

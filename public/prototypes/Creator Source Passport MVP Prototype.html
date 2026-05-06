@@ -1,0 +1,1629 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creator Source Passport MVP Prototype</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --surface-2: #f9fafb;
+      --surface-3: #eef2f4;
+      --ink: #111827;
+      --muted: #667085;
+      --soft: #98a2b3;
+      --line: #d7dee5;
+      --line-strong: #b8c3cc;
+      --accent: #0f766e;
+      --accent-2: #315f7b;
+      --accent-soft: #e3f5f1;
+      --danger: #b42318;
+      --warn: #946200;
+      --ok: #087443;
+      --shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+      --radius: 8px;
+      --mono: "SFMono-Regular", "Cascadia Mono", Consolas, monospace;
+      --sans: Inter, "Segoe UI", Arial, sans-serif;
+    }
+
+    body.theme-ledger {
+      --bg: #f7f5f1;
+      --surface: #fffdf8;
+      --surface-2: #f5f0e7;
+      --surface-3: #ebe3d5;
+      --ink: #1d1b17;
+      --muted: #6d6254;
+      --line: #ddd2c1;
+      --line-strong: #bba98f;
+      --accent: #6f4e1f;
+      --accent-2: #375a6f;
+      --accent-soft: #efe6d7;
+    }
+
+    body.theme-command {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --surface: #111827;
+      --surface-2: #161f2b;
+      --surface-3: #1f2a37;
+      --ink: #e5e7eb;
+      --muted: #a3adba;
+      --soft: #788390;
+      --line: #273444;
+      --line-strong: #3d4c5e;
+      --accent: #5eead4;
+      --accent-2: #93c5fd;
+      --accent-soft: #12333a;
+      --shadow: 0 18px 56px rgba(0, 0, 0, 0.3);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      border-radius: 7px;
+      min-height: 34px;
+      padding: 7px 11px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: var(--line-strong);
+      background: var(--surface-2);
+    }
+
+    button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    body.theme-command button.primary {
+      color: #071112;
+    }
+
+    .shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 244px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      border-right: 1px solid var(--line);
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      padding: 18px 16px;
+      gap: 18px;
+    }
+
+    .brand {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 6px;
+    }
+
+    .nav button {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 24px 1fr auto;
+      align-items: center;
+      text-align: left;
+      border-color: transparent;
+      background: transparent;
+      padding: 8px 9px;
+    }
+
+    .nav button.active {
+      background: var(--accent-soft);
+      border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+    }
+
+    .step-no {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--surface-3);
+    }
+
+    .nav button.active .step-no {
+      color: var(--accent);
+      background: var(--surface);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 99px;
+      background: var(--ok);
+    }
+
+    .workspace {
+      min-width: 0;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      min-height: 68px;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(16px);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 12px 22px;
+    }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .topbar p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .segmented {
+      display: flex;
+      gap: 2px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .segmented button {
+      border: 0;
+      min-height: 30px;
+      background: transparent;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .segmented button.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .main {
+      padding: 22px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(310px, 0.6fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .page-title {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .page-title h2 {
+      max-width: 840px;
+      margin: 0;
+      font-size: 27px;
+      line-height: 1.15;
+      text-wrap: pretty;
+      letter-spacing: 0;
+    }
+
+    .page-title p {
+      max-width: 780px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .identity-strip {
+      display: grid;
+      gap: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .identity-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 10px;
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+
+    .identity-row:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .identity-row dt {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .identity-row dd {
+      margin: 0;
+      font-family: var(--mono);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .panes {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.9fr) minmax(440px, 1.25fr) minmax(300px, 0.85fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .panel-head {
+      min-height: 48px;
+      border-bottom: 1px solid var(--line);
+      padding: 11px 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      background: var(--surface-2);
+    }
+
+    .panel-head h3 {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .panel-head span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .panel-body {
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .field input, .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      color: var(--ink);
+      padding: 9px 10px;
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .field input:focus, .field textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 26px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      color: var(--muted);
+      background: var(--surface-2);
+      font-size: 12px;
+    }
+
+    .chip.strong {
+      color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent) 44%, var(--line));
+      background: var(--accent-soft);
+      font-weight: 700;
+    }
+
+    .claim-row {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px;
+      display: grid;
+      gap: 8px;
+      background: var(--surface);
+    }
+
+    .claim-row strong {
+      font-size: 13px;
+    }
+
+    .claim-row p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-page {
+      display: grid;
+      gap: 14px;
+    }
+
+    .source-document {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+    }
+
+    .source-document h2 {
+      margin: 0 0 10px;
+      font-size: 25px;
+      line-height: 1.18;
+      text-wrap: pretty;
+    }
+
+    .source-document .thesis {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .meta-item {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+
+    .meta-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .meta-item strong {
+      display: block;
+      margin-top: 2px;
+      font-family: var(--mono);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .anchor-box {
+      border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+      border-radius: 8px;
+      background: var(--accent-soft);
+      padding: 10px 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .doc-section {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      margin-top: 14px;
+    }
+
+    .doc-section h4 {
+      margin: 0 0 8px;
+      font-size: 13px;
+    }
+
+    .doc-section p, .doc-section li {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .artifact-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .artifact {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: var(--surface);
+    }
+
+    .artifact strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .artifact small {
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    .badge {
+      border: 1px solid color-mix(in srgb, var(--ok) 40%, var(--line));
+      color: var(--ok);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      background: color-mix(in srgb, var(--ok) 11%, transparent);
+      white-space: nowrap;
+    }
+
+    .badge.warn {
+      border-color: color-mix(in srgb, var(--warn) 40%, var(--line));
+      color: var(--warn);
+      background: color-mix(in srgb, var(--warn) 12%, transparent);
+    }
+
+    .badge.fail {
+      border-color: color-mix(in srgb, var(--danger) 40%, var(--line));
+      color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 10%, transparent);
+    }
+
+    .variant-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .variant-tabs button {
+      min-width: 0;
+      padding: 7px 6px;
+      font-size: 12px;
+    }
+
+    .variant-tabs button.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-weight: 800;
+    }
+
+    .variant-copy {
+      min-height: 300px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--surface-2);
+      font-family: var(--mono);
+      font-size: 12px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .publication-row {
+      display: grid;
+      grid-template-columns: 74px 1fr auto;
+      gap: 9px;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding: 8px 0;
+    }
+
+    .publication-row:last-child {
+      border-bottom: 0;
+    }
+
+    .publication-row input {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      color: var(--ink);
+      padding: 7px 8px;
+      min-width: 0;
+    }
+
+    .monitor-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .monitor-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: var(--surface);
+      min-height: 108px;
+    }
+
+    .monitor-card strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .monitor-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .monitor-card.pass {
+      border-color: color-mix(in srgb, var(--ok) 42%, var(--line));
+    }
+
+    .monitor-card.fail {
+      border-color: color-mix(in srgb, var(--danger) 42%, var(--line));
+    }
+
+    .score-band {
+      display: grid;
+      grid-template-columns: 148px 1fr;
+      gap: 14px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--surface-2);
+    }
+
+    .score {
+      width: 112px;
+      height: 112px;
+      border-radius: 999px;
+      border: 10px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 850;
+      color: var(--danger);
+      background: var(--surface);
+      justify-self: center;
+    }
+
+    .score.good {
+      color: var(--ok);
+      border-color: color-mix(in srgb, var(--ok) 52%, var(--line));
+    }
+
+    .toggle-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .toggle-row label {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .suggestion {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 9px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: var(--surface);
+    }
+
+    .suggestion .rank {
+      width: 23px;
+      height: 23px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-weight: 800;
+      font-size: 11px;
+    }
+
+    .suggestion strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .suggestion p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 50;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+      padding: 10px 12px;
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: 160ms ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1180px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .panes, .hero-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .main {
+        padding: 14px;
+      }
+
+      .nav {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-grid, .monitor-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="theme-authority">
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="mark">SP</div>
+        <div>
+          <strong>Source Passport</strong>
+          <span>Canonical source infrastructure</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Workflow">
+        <button class="active" data-step="editor"><span class="step-no">1</span><span>Editor</span><span class="status-dot"></span></button>
+        <button data-step="preview"><span class="step-no">2</span><span>Canonical Preview</span><span class="status-dot"></span></button>
+        <button data-step="variants"><span class="step-no">3</span><span>Variants + Publish</span><span class="status-dot"></span></button>
+        <button data-step="monitor"><span class="step-no">4</span><span>Monitor + Revise</span><span class="status-dot"></span></button>
+      </nav>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Authority state</h3>
+          <span>v1</span>
+        </div>
+        <div class="panel-body">
+          <div class="artifact"><div><strong>Canonical URL</strong><small>/s/durable-source-page-a2957905adc9</small></div><span class="badge">Ready</span></div>
+          <div class="artifact"><div><strong>Content hash</strong><small>a2957905adc9</small></div><span class="badge">Stable</span></div>
+          <div class="artifact"><div><strong>Anchor policy</strong><small>hash + canonical source</small></div><span class="badge">Visible</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div>
+          <h1>Lin Source Lab source workspace</h1>
+          <p>Turn one serious idea into a durable source page, AI-readable pack, anchored variants, monitor evidence, and revision actions.</p>
+        </div>
+        <div class="toolbar">
+          <div class="segmented" aria-label="Design direction">
+            <button class="active" data-theme="authority">Authority Console</button>
+            <button data-theme="ledger">Citation Ledger</button>
+            <button data-theme="command">Research Ops</button>
+          </div>
+          <div class="segmented" aria-label="Language">
+            <button class="active" data-lang="en">EN</button>
+            <button data-lang="zh">中文</button>
+          </div>
+          <button id="saveState">Save draft</button>
+          <button class="primary" id="generateAssets">Generate source assets</button>
+        </div>
+      </header>
+
+      <section class="main">
+        <div class="hero-row">
+          <section class="page-title">
+            <p class="eyebrow">Creator Source Passport MVP</p>
+            <h2>A serious idea needs a source page before it needs more posts</h2>
+            <p>Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.</p>
+          </section>
+          <dl class="identity-strip">
+            <div class="identity-row"><dt>Creator</dt><dd>Lin Source Lab</dd></div>
+            <div class="identity-row"><dt>Canonical</dt><dd>https://demo.creator-source.local/s/durable-source-page-a2957905adc9</dd></div>
+            <div class="identity-row"><dt>Source hash</dt><dd>a2957905adc9</dd></div>
+            <div class="identity-row"><dt>Citation</dt><dd>Source Passport v1</dd></div>
+          </dl>
+        </div>
+
+        <section class="panes step-view" data-view="editor">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>Source Passport Editor</h3>
+                <span>Structured source asset input</span>
+              </div>
+              <span class="badge">Draft complete</span>
+            </div>
+            <div class="panel-body">
+              <div class="field">
+                <label>Title</label>
+                <input value="A serious idea needs a source page before it needs more posts">
+              </div>
+              <div class="field">
+                <label>Core thesis</label>
+                <textarea>Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.</textarea>
+              </div>
+              <div class="field">
+                <label>Author</label>
+                <input value="Lin Source Lab">
+              </div>
+              <div class="field">
+                <label>Topics</label>
+                <div class="chips">
+                  <span class="chip strong">AI retrieval</span>
+                  <span class="chip strong">content provenance</span>
+                  <span class="chip strong">creator source authority</span>
+                </div>
+              </div>
+              <div class="field">
+                <label>Source text</label>
+                <textarea style="min-height: 190px">Most expert posts are optimized for feeds. Feeds are good for reach, but weak for memory. A useful idea needs a stable source URL, a clear author, a version, evidence, limitations, and a machine-readable summary.
+
+A Source Passport makes the original idea durable before it gets remixed across X, LinkedIn, WeChat, and Zhihu. The platform posts become distribution copies, not the root source.</textarea>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>Claims, Evidence, References</h3>
+                <span>AI-readable proof structure</span>
+              </div>
+              <span class="badge">3 claims</span>
+            </div>
+            <div class="panel-body">
+              <div class="claim-row">
+                <strong>A canonical source page is more durable than a platform post.</strong>
+                <p>Evidence: The source page has a stable URL, version, hash, schema, sitemap entry, and AI-readable markdown.</p>
+                <span class="chip">confidence: high</span>
+              </div>
+              <div class="claim-row">
+                <strong>Platform variants should distribute the idea without becoming the root citation target.</strong>
+                <p>Evidence: Each variant includes the same visible source anchor pointing back to the canonical URL.</p>
+                <span class="chip">confidence: high</span>
+              </div>
+              <div class="claim-row">
+                <strong>AI retrieval monitoring should score recoverability, not vanity traffic.</strong>
+                <p>Evidence: The monitor checks creator, canonical URL, hash, and claim-evidence preservation.</p>
+                <span class="chip">confidence: medium</span>
+              </div>
+              <div class="field">
+                <label>References</label>
+                <input value="Source Passport MVP project context - https://demo.creator-source.local/ai/index.md">
+              </div>
+              <div class="field">
+                <label>Limitations</label>
+                <textarea>AI citation cannot be guaranteed by source markup alone.
+Closed social platforms may hide or rewrite source links.
+The first monitor is a local response analyzer, not a live AI search integration.</textarea>
+              </div>
+            </div>
+          </section>
+
+          <aside class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>Generation readiness</h3>
+                <span>Required MVP fields</span>
+              </div>
+            </div>
+            <div class="panel-body artifact-list">
+              <div class="artifact"><div><strong>Title + thesis</strong><small>Human and AI summary</small></div><span class="badge">Ready</span></div>
+              <div class="artifact"><div><strong>Creator identity</strong><small>author/entity is explicit</small></div><span class="badge">Ready</span></div>
+              <div class="artifact"><div><strong>Claims + evidence</strong><small>3 claim-evidence pairs</small></div><span class="badge">Ready</span></div>
+              <div class="artifact"><div><strong>Limitations</strong><small>prevents overgeneralization</small></div><span class="badge">Ready</span></div>
+              <div class="artifact"><div><strong>Recommended citation</strong><small>auto-generated if absent</small></div><span class="badge">Ready</span></div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="panes step-view hidden" data-view="preview">
+          <section class="panel" style="grid-column: span 2;">
+            <div class="panel-head">
+              <div>
+                <h3>Canonical Source Page Preview</h3>
+                <span>Human-readable source page with machine-readable metadata</span>
+              </div>
+              <button data-copy="https://demo.creator-source.local/s/durable-source-page-a2957905adc9">Copy canonical URL</button>
+            </div>
+            <div class="panel-body source-page">
+              <article class="source-document">
+                <p class="eyebrow">Canonical Source Passport</p>
+                <h2>A serious idea needs a source page before it needs more posts</h2>
+                <p class="thesis">Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.</p>
+                <div class="meta-grid">
+                  <div class="meta-item"><span>Author</span><strong>Lin Source Lab</strong></div>
+                  <div class="meta-item"><span>Version</span><strong>1</strong></div>
+                  <div class="meta-item"><span>Hash</span><strong>a2957905adc9</strong></div>
+                  <div class="meta-item"><span>Updated</span><strong>2026-04-26</strong></div>
+                </div>
+                <div class="anchor-box">Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9</div>
+                <section class="doc-section">
+                  <h4>Source text</h4>
+                  <p>Most expert posts are optimized for feeds. Feeds are good for reach, but weak for memory. A useful idea needs a stable source URL, a clear author, a version, evidence, limitations, and a machine-readable summary.</p>
+                  <p>A Source Passport makes the original idea durable before it gets remixed across X, LinkedIn, WeChat, and Zhihu. The platform posts become distribution copies, not the root source.</p>
+                </section>
+                <section class="doc-section">
+                  <h4>Recommended citation</h4>
+                  <p>Lin Source Lab, "A serious idea needs a source page before it needs more posts," Source Passport v1, https://demo.creator-source.local/s/durable-source-page-a2957905adc9</p>
+                </section>
+              </article>
+            </div>
+          </section>
+
+          <aside class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>AI Index Pack Preview</h3>
+                <span>Generated static assets</span>
+              </div>
+            </div>
+            <div class="panel-body artifact-list">
+              <div class="artifact"><div><strong>llms.txt</strong><small>canonical source entry + prompts</small></div><span class="badge">Ready</span></div>
+              <div class="artifact"><div><strong>llms-full.txt</strong><small>profile, index, source markdown</small></div><span class="badge">Ready</span></div>
+              <div class="artifact"><div><strong>AI markdown</strong><small>/ai/sources/durable-source-page.md</small></div><span class="badge">Ready</span></div>
+              <div class="artifact"><div><strong>schema.json</strong><small>Person + Article JSON-LD</small></div><span class="badge">Ready</span></div>
+              <div class="artifact"><div><strong>sitemap.xml</strong><small>canonical + AI asset URLs</small></div><span class="badge">Ready</span></div>
+              <div class="artifact"><div><strong>robots.txt</strong><small>AI/search crawler allow rules</small></div><span class="badge">Ready</span></div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="panes step-view hidden" data-view="variants">
+          <section class="panel" style="grid-column: span 2;">
+            <div class="panel-head">
+              <div>
+                <h3>Platform Variant Studio</h3>
+                <span>Distribution copies anchored to the source page</span>
+              </div>
+              <button data-copy="variant">Copy selected variant</button>
+            </div>
+            <div class="panel-body">
+              <div class="variant-tabs">
+                <button class="active" data-platform="x">X</button>
+                <button data-platform="linkedin">LinkedIn</button>
+                <button data-platform="wechat">WeChat</button>
+                <button data-platform="zhihu">Zhihu</button>
+              </div>
+              <div class="variant-copy" id="variantCopy"></div>
+              <div class="anchor-box">Visible source anchor required in every variant:
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9</div>
+            </div>
+          </section>
+
+          <aside class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>Manual Publication Tracker</h3>
+                <span>Save platform URLs after manual posting</span>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="publication-row"><strong>X</strong><input value="https://x.com/example/status/123"><span class="badge">Anchor</span></div>
+              <div class="publication-row"><strong>LinkedIn</strong><input value="https://linkedin.com/posts/lin-source-lab-source-passport"><span class="badge">Anchor</span></div>
+              <div class="publication-row"><strong>WeChat</strong><input placeholder="Paste manual publish URL"><span class="badge warn">Draft</span></div>
+              <div class="publication-row"><strong>Zhihu</strong><input placeholder="Paste manual publish URL"><span class="badge warn">Draft</span></div>
+              <button class="primary" id="savePublication">Save publication URLs</button>
+              <div class="artifact"><div><strong>Publishing policy</strong><small>Manual copy/export only in MVP</small></div><span class="badge">Scoped</span></div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="step-view hidden" data-view="monitor">
+          <div class="panes">
+            <section class="panel" style="grid-column: span 2;">
+              <div class="panel-head">
+                <div>
+                  <h3>Retrieval Monitor</h3>
+                  <span>Test whether AI can recover and attribute the source</span>
+                </div>
+                <button class="primary" id="rerunMonitor">Run local response check</button>
+              </div>
+              <div class="panel-body">
+                <div class="score-band">
+                  <div class="score" id="score">0</div>
+                  <div>
+                    <p class="eyebrow">Monitor prompt</p>
+                    <h3 style="margin:0 0 6px;">Who argued that serious creator ideas need canonical source pages before more platform posts?</h3>
+                    <p style="margin:0;color:var(--muted);">Current fixture response mentions the topic but misses canonical URL, source hash, creator name, and claim coverage.</p>
+                  </div>
+                </div>
+                <div class="toggle-row">
+                  <label><input type="checkbox" data-monitor="creator"> Creator name cited</label>
+                  <label><input type="checkbox" data-monitor="url"> Canonical URL cited</label>
+                  <label><input type="checkbox" data-monitor="hash"> Source hash cited</label>
+                  <label><input type="checkbox" data-monitor="claim"> Core claim covered</label>
+                </div>
+                <div class="monitor-grid">
+                  <div class="monitor-card fail" data-card="creator"><strong>Creator</strong><p>Lin Source Lab is missing from the current response.</p></div>
+                  <div class="monitor-card fail" data-card="url"><strong>Canonical URL</strong><p>No citation to the source page.</p></div>
+                  <div class="monitor-card fail" data-card="hash"><strong>Source hash</strong><p>a2957905adc9 is not present.</p></div>
+                  <div class="monitor-card fail" data-card="claim"><strong>Claim coverage</strong><p>0% coverage of the claim-evidence map.</p></div>
+                </div>
+              </div>
+            </section>
+
+            <aside class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Revision Suggestions</h3>
+                  <span>Concrete changes after failed retrieval</span>
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="suggestion"><span class="rank">1</span><div><strong>Add a direct citation block near the first screen.</strong><p>Include title, creator, canonical URL, and content hash before the long body.</p></div></div>
+                <div class="suggestion"><span class="rank">2</span><div><strong>Move the visible source anchor into opening and closing sections.</strong><p>Make platform copies route back to the canonical source, not themselves.</p></div></div>
+                <div class="suggestion"><span class="rank">3</span><div><strong>Repeat creator name in title area, schema author, and AI profile summary.</strong><p>Strengthens entity attribution for retrieval systems.</p></div></div>
+                <div class="suggestion"><span class="rank">4</span><div><strong>Add FAQ-style claim blocks.</strong><p>Restate top claims as direct question-answer structures.</p></div></div>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast">Saved</div>
+
+  <script>
+    const variants = {
+      x: `1/ A serious idea needs a source page before it needs more posts
+
+Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.
+
+2/ A canonical source page is more durable than a platform post.
+3/ Platform variants should distribute the idea without becoming the root citation target.
+4/ AI retrieval monitoring should score recoverability, not vanity traffic.
+
+5/ Durable source page, evidence, and citation:
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`,
+      linkedin: `A serious idea needs a source page before it needs more posts
+
+Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.
+
+What this means:
+- A canonical source page is more durable than a platform post.
+  Evidence: The source page has a stable URL, version, hash, schema, sitemap entry, and AI-readable markdown.
+- Platform variants should distribute the idea without becoming the root citation target.
+  Evidence: Each variant includes the same visible source anchor pointing back to the canonical URL.
+- AI retrieval monitoring should score recoverability, not vanity traffic.
+  Evidence: The monitor checks creator, canonical URL, hash, and claim-evidence preservation.
+
+Recommended citation:
+Lin Source Lab, "A serious idea needs a source page before it needs more posts," Source Passport v1, https://demo.creator-source.local/s/durable-source-page-a2957905adc9
+
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`,
+      wechat: `# A serious idea needs a source page before it needs more posts
+
+## Core thesis
+
+Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.
+
+## Full draft
+
+Most expert posts are optimized for feeds. Feeds are good for reach, but weak for memory. A useful idea needs a stable source URL, a clear author, a version, evidence, limitations, and a machine-readable summary.
+
+A Source Passport makes the original idea durable before it gets remixed across X, LinkedIn, WeChat, and Zhihu. The platform posts become distribution copies, not the root source.
+
+## Source anchor
+
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`,
+      zhihu: `# Answer: A serious idea needs a source page before it needs more posts
+
+Short answer: Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.
+
+My reasoning:
+Most expert posts are optimized for feeds. Feeds are good for reach, but weak for memory. A useful idea needs a stable source URL, a clear author, a version, evidence, limitations, and a machine-readable summary.
+
+Boundaries:
+- AI citation cannot be guaranteed by source markup alone.
+- Closed social platforms may hide or rewrite source links.
+- The first monitor is a local response analyzer, not a live AI search integration.
+
+For the canonical version, evidence, and future revisions:
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`
+    };
+
+    const state = {
+      step: localStorage.getItem("passport-step") || "editor",
+      theme: localStorage.getItem("passport-theme") || "authority",
+      platform: localStorage.getItem("passport-platform") || "x"
+    };
+
+    const toast = document.getElementById("toast");
+    const variantCopy = document.getElementById("variantCopy");
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.setTimeout(() => toast.classList.remove("show"), 1300);
+    }
+
+    function setStep(step) {
+      state.step = step;
+      localStorage.setItem("passport-step", step);
+      document.querySelectorAll("[data-step]").forEach((button) => button.classList.toggle("active", button.dataset.step === step));
+      document.querySelectorAll("[data-view]").forEach((view) => view.classList.toggle("hidden", view.dataset.view !== step));
+    }
+
+    function setTheme(theme) {
+      state.theme = theme;
+      localStorage.setItem("passport-theme", theme);
+      document.body.className = theme === "authority" ? "theme-authority" : `theme-${theme}`;
+      document.querySelectorAll("[data-theme]").forEach((button) => button.classList.toggle("active", button.dataset.theme === theme));
+    }
+
+    function setPlatform(platform) {
+      state.platform = platform;
+      localStorage.setItem("passport-platform", platform);
+      variantCopy.textContent = variants[platform];
+      document.querySelectorAll("[data-platform]").forEach((button) => button.classList.toggle("active", button.dataset.platform === platform));
+    }
+
+    function updateMonitor() {
+      const checks = Array.from(document.querySelectorAll("[data-monitor]"));
+      let score = 0;
+      const weights = { creator: 20, url: 40, hash: 15, claim: 25 };
+      checks.forEach((input) => {
+        const key = input.dataset.monitor;
+        const card = document.querySelector(`[data-card="${key}"]`);
+        if (input.checked) {
+          score += weights[key];
+          card.classList.remove("fail");
+          card.classList.add("pass");
+        } else {
+          card.classList.remove("pass");
+          card.classList.add("fail");
+        }
+      });
+      const scoreEl = document.getElementById("score");
+      scoreEl.textContent = score;
+      scoreEl.classList.toggle("good", score >= 75);
+    }
+
+    document.querySelectorAll("[data-step]").forEach((button) => button.addEventListener("click", () => setStep(button.dataset.step)));
+    document.querySelectorAll("[data-theme]").forEach((button) => button.addEventListener("click", () => setTheme(button.dataset.theme)));
+    document.querySelectorAll("[data-platform]").forEach((button) => button.addEventListener("click", () => setPlatform(button.dataset.platform)));
+    document.querySelectorAll("[data-monitor]").forEach((input) => input.addEventListener("change", updateMonitor));
+
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const value = button.dataset.copy === "variant" ? variantCopy.textContent : button.dataset.copy;
+        try {
+          await navigator.clipboard.writeText(value);
+          showToast("Copied to clipboard");
+        } catch {
+          showToast("Copy unavailable in this browser");
+        }
+      });
+    });
+
+    document.getElementById("saveState").addEventListener("click", () => showToast("Draft state saved"));
+    document.getElementById("generateAssets").addEventListener("click", () => {
+      setStep("preview");
+      showToast("Source assets generated");
+    });
+    document.getElementById("savePublication").addEventListener("click", () => showToast("Publication URLs saved"));
+    document.getElementById("rerunMonitor").addEventListener("click", () => showToast("Local monitor refreshed"));
+
+    setTheme(state.theme);
+    setStep(state.step);
+    setPlatform(state.platform);
+    updateMonitor();
+  </script>
+  <script>
+    const localization = (() => {
+      const zhText = new Map([
+        ["Saved", "已保存"],
+        ["Canonical source infrastructure", "规范源头基础设施"],
+        ["Editor", "编辑"],
+        ["Canonical Preview", "源头页预览"],
+        ["Variants + Publish", "变体与发布"],
+        ["Monitor + Revise", "监测与修订"],
+        ["Authority state", "权威状态"],
+        ["Canonical URL", "Canonical URL"],
+        ["Content hash", "内容哈希"],
+        ["Anchor policy", "锚点策略"],
+        ["hash + canonical source", "hash + canonical 源头"],
+        ["Ready", "就绪"],
+        ["Stable", "稳定"],
+        ["Visible", "可见"],
+        ["Lin Source Lab source workspace", "Lin Source Lab 源头资产工作台"],
+        ["Turn one serious idea into a durable source page, AI-readable pack, anchored variants, monitor evidence, and revision actions.", "把一个严肃观点沉淀成耐久源头页、AI-readable pack、带锚点平台变体、监测证据和修订动作。"],
+        ["Authority Console", "权威控制台"],
+        ["Citation Ledger", "引用账本"],
+        ["Research Ops", "研究运营台"],
+        ["Save draft", "保存草稿"],
+        ["Generate source assets", "生成源头资产"],
+        ["Creator Source Passport MVP", "创作者源护照 MVP"],
+        ["A serious idea needs a source page before it needs more posts", "一个严肃观点在需要更多帖子之前，先需要一个源头页"],
+        ["Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.", "专业创作者应该为每个严肃观点发布一个 canonical source page，然后再把平台版本分发到 X、LinkedIn、微信和知乎。"],
+        ["Creator", "创作者"],
+        ["Canonical", "Canonical"],
+        ["Source hash", "源头哈希"],
+        ["Citation", "推荐引用"],
+        ["Source Passport Editor", "Source Passport 编辑器"],
+        ["Structured source asset input", "结构化源头资产输入"],
+        ["Draft complete", "草稿完整"],
+        ["Title", "标题"],
+        ["Core thesis", "核心论点"],
+        ["Author", "作者"],
+        ["Topics", "主题"],
+        ["AI retrieval", "AI 检索"],
+        ["content provenance", "内容溯源"],
+        ["creator source authority", "创作者源头权威"],
+        ["Source text", "源头正文"],
+        ["Claims, Evidence, References", "主张、证据、引用"],
+        ["AI-readable proof structure", "AI 可读的证明结构"],
+        ["3 claims", "3 条主张"],
+        ["A canonical source page is more durable than a platform post.", "canonical source page 比平台帖子更耐久。"],
+        ["Evidence: The source page has a stable URL, version, hash, schema, sitemap entry, and AI-readable markdown.", "Evidence: 源头页拥有稳定 URL、版本、hash、schema、sitemap entry 和 AI-readable markdown。"],
+        ["confidence: high", "置信度：高"],
+        ["Platform variants should distribute the idea without becoming the root citation target.", "平台变体负责分发观点，但不应该成为根引用目标。"],
+        ["Evidence: Each variant includes the same visible source anchor pointing back to the canonical URL.", "Evidence: 每个平台版本都包含同一个 visible source anchor，并指回 canonical URL。"],
+        ["AI retrieval monitoring should score recoverability, not vanity traffic.", "AI retrieval monitor 应该衡量可回溯性，而不是虚荣流量。"],
+        ["Evidence: The monitor checks creator, canonical URL, hash, and claim-evidence preservation.", "Evidence: monitor 会检查 creator、canonical URL、hash 和 claim-evidence 保真度。"],
+        ["confidence: medium", "置信度：中"],
+        ["References", "参考资料"],
+        ["Source Passport MVP project context - https://demo.creator-source.local/ai/index.md", "Source Passport MVP 项目上下文 - https://demo.creator-source.local/ai/index.md"],
+        ["Limitations", "限制条件"],
+        ["Generation readiness", "生成就绪度"],
+        ["Required MVP fields", "MVP 必填字段"],
+        ["Title + thesis", "标题 + 论点"],
+        ["Human and AI summary", "面向人和 AI 的摘要"],
+        ["Creator identity", "创作者身份"],
+        ["author/entity is explicit", "作者/实体明确"],
+        ["Claims + evidence", "主张 + 证据"],
+        ["3 claim-evidence pairs", "3 组主张-证据"],
+        ["prevents overgeneralization", "防止过度泛化"],
+        ["Recommended citation", "推荐引用"],
+        ["auto-generated if absent", "缺省时自动生成"],
+        ["Canonical Source Page Preview", "Canonical 源头页预览"],
+        ["Human-readable source page with machine-readable metadata", "人可读源头页 + 机器可读元数据"],
+        ["Copy canonical URL", "复制 canonical URL"],
+        ["Canonical Source Passport", "Canonical Source Passport"],
+        ["Version", "版本"],
+        ["Hash", "哈希"],
+        ["Updated", "更新"],
+        ["AI Index Pack Preview", "AI Index Pack 预览"],
+        ["Generated static assets", "已生成静态资产"],
+        ["canonical source entry + prompts", "canonical 源头入口 + prompts"],
+        ["profile, index, source markdown", "profile、index、source markdown"],
+        ["Person + Article JSON-LD", "Person + Article JSON-LD"],
+        ["canonical + AI asset URLs", "canonical + AI asset URLs"],
+        ["AI/search crawler allow rules", "AI/search crawler allow rules"],
+        ["Platform Variant Studio", "平台变体工作台"],
+        ["Distribution copies anchored to the source page", "锚定源头页的平台分发副本"],
+        ["Copy selected variant", "复制当前变体"],
+        ["Visible source anchor required in every variant:", "每个平台变体都必须包含可见 source anchor："],
+        ["Manual Publication Tracker", "人工发布记录"],
+        ["Save platform URLs after manual posting", "手动发布后保存平台 URL"],
+        ["Paste manual publish URL", "粘贴手动发布 URL"],
+        ["Anchor", "有锚点"],
+        ["Draft", "草稿"],
+        ["Save publication URLs", "保存发布 URL"],
+        ["Publishing policy", "发布策略"],
+        ["Manual copy/export only in MVP", "MVP 仅支持手动复制/导出"],
+        ["Scoped", "范围内"],
+        ["Retrieval Monitor", "AI 回溯监测"],
+        ["Test whether AI can recover and attribute the source", "检查 AI 是否能找回并归因到源头"],
+        ["Run local response check", "运行本地回复检查"],
+        ["Monitor prompt", "监测提示词"],
+        ["Who argued that serious creator ideas need canonical source pages before more platform posts?", "谁提出严肃创作者观点在发布更多平台帖子之前，需要 canonical source page？"],
+        ["Current fixture response mentions the topic but misses canonical URL, source hash, creator name, and claim coverage.", "当前 fixture 回复提到了主题，但漏掉 canonical URL、source hash、creator name 和 claim coverage。"],
+        ["Creator name cited", "引用创作者名"],
+        ["Canonical URL cited", "引用 Canonical URL"],
+        ["Source hash cited", "引用源头 hash"],
+        ["Core claim covered", "覆盖核心 claim"],
+        ["Lin Source Lab is missing from the current response.", "当前回复没有提到 Lin Source Lab。"],
+        ["No citation to the source page.", "没有引用源头页。"],
+        ["Source hash", "源头 hash"],
+        ["a2957905adc9 is not present.", "没有出现 a2957905adc9。"],
+        ["Claim coverage", "Claim 覆盖率"],
+        ["0% coverage of the claim-evidence map.", "claim-evidence map 覆盖率为 0%。"],
+        ["Revision Suggestions", "修订建议"],
+        ["Concrete changes after failed retrieval", "检索失败后的具体修改动作"],
+        ["Add a direct citation block near the first screen.", "在首屏附近增加直接引用块。"],
+        ["Include title, creator, canonical URL, and content hash before the long body.", "在长正文前展示标题、创作者、canonical URL 和内容 hash。"],
+        ["Move the visible source anchor into opening and closing sections.", "把 visible source anchor 放到开头和结尾。"],
+        ["Make platform copies route back to the canonical source, not themselves.", "让平台副本回到 canonical source，而不是成为引用目标。"],
+        ["Repeat creator name in title area, schema author, and AI profile summary.", "在标题区、schema author 和 AI profile summary 重复创作者名。"],
+        ["Strengthens entity attribution for retrieval systems.", "增强检索系统的实体归因。"],
+        ["Add FAQ-style claim blocks.", "增加 FAQ 式 claim 块。"],
+        ["Restate top claims as direct question-answer structures.", "把关键主张重写为直接问答结构。"],
+        ["Copied to clipboard", "已复制到剪贴板"],
+        ["Copy unavailable in this browser", "当前浏览器无法复制"],
+        ["Draft state saved", "草稿状态已保存"],
+        ["Source assets generated", "源头资产已生成"],
+        ["Publication URLs saved", "发布 URL 已保存"],
+        ["Local monitor refreshed", "本地监测已刷新"]
+      ]);
+
+      const zhValues = new Map([
+        [`Most expert posts are optimized for feeds. Feeds are good for reach, but weak for memory. A useful idea needs a stable source URL, a clear author, a version, evidence, limitations, and a machine-readable summary.
+
+A Source Passport makes the original idea durable before it gets remixed across X, LinkedIn, WeChat, and Zhihu. The platform posts become distribution copies, not the root source.`, `大多数专家帖子是为信息流优化的。信息流适合传播，但不适合长期记忆。一个有用观点需要稳定的源头 URL、清晰作者、版本、证据、限制条件和机器可读摘要。
+
+Source Passport 让原始观点在被 X、LinkedIn、微信和知乎改写分发之前，先成为一个耐久源头。平台帖子是分发副本，不是根源头。`],
+        [`AI citation cannot be guaranteed by source markup alone.
+Closed social platforms may hide or rewrite source links.
+The first monitor is a local response analyzer, not a live AI search integration.`, `仅靠源头页标记无法保证 AI 一定引用。
+封闭社交平台可能隐藏或改写源头链接。
+第一版 monitor 是本地回复分析器，不是实时 AI 搜索集成。`]
+      ]);
+
+      const enText = new Map(Array.from(zhText, ([en, zh]) => [zh, en]));
+      const enValues = new Map(Array.from(zhValues, ([en, zh]) => [zh, en]));
+
+      const variants = {
+        en: {
+          x: `1/ A serious idea needs a source page before it needs more posts
+
+Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.
+
+2/ A canonical source page is more durable than a platform post.
+3/ Platform variants should distribute the idea without becoming the root citation target.
+4/ AI retrieval monitoring should score recoverability, not vanity traffic.
+
+5/ Durable source page, evidence, and citation:
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`,
+          linkedin: `A serious idea needs a source page before it needs more posts
+
+Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.
+
+What this means:
+- A canonical source page is more durable than a platform post.
+  Evidence: The source page has a stable URL, version, hash, schema, sitemap entry, and AI-readable markdown.
+- Platform variants should distribute the idea without becoming the root citation target.
+  Evidence: Each variant includes the same visible source anchor pointing back to the canonical URL.
+- AI retrieval monitoring should score recoverability, not vanity traffic.
+  Evidence: The monitor checks creator, canonical URL, hash, and claim-evidence preservation.
+
+Recommended citation:
+Lin Source Lab, "A serious idea needs a source page before it needs more posts," Source Passport v1, https://demo.creator-source.local/s/durable-source-page-a2957905adc9
+
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`,
+          wechat: `# A serious idea needs a source page before it needs more posts
+
+## Core thesis
+
+Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.
+
+## Full draft
+
+Most expert posts are optimized for feeds. Feeds are good for reach, but weak for memory. A useful idea needs a stable source URL, a clear author, a version, evidence, limitations, and a machine-readable summary.
+
+A Source Passport makes the original idea durable before it gets remixed across X, LinkedIn, WeChat, and Zhihu. The platform posts become distribution copies, not the root source.
+
+## Source anchor
+
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`,
+          zhihu: `# Answer: A serious idea needs a source page before it needs more posts
+
+Short answer: Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.
+
+My reasoning:
+Most expert posts are optimized for feeds. Feeds are good for reach, but weak for memory. A useful idea needs a stable source URL, a clear author, a version, evidence, limitations, and a machine-readable summary.
+
+Boundaries:
+- AI citation cannot be guaranteed by source markup alone.
+- Closed social platforms may hide or rewrite source links.
+- The first monitor is a local response analyzer, not a live AI search integration.
+
+For the canonical version, evidence, and future revisions:
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`
+        },
+        zh: {
+          x: `1/ 一个严肃观点在需要更多帖子之前，先需要一个源头页
+
+专业创作者应该为每个严肃观点发布一个 canonical source page，然后再把平台版本分发到 X、LinkedIn、微信和知乎。
+
+2/ canonical source page 比平台帖子更耐久。
+3/ 平台变体负责分发观点，但不应该成为根引用目标。
+4/ AI retrieval monitor 应该衡量可回溯性，而不是虚荣流量。
+
+5/ 源头页、证据和引用方式：
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`,
+          linkedin: `一个严肃观点在需要更多帖子之前，先需要一个源头页
+
+专业创作者应该为每个严肃观点发布一个 canonical source page，然后再把平台版本分发到 X、LinkedIn、微信和知乎。
+
+这意味着：
+- canonical source page 比平台帖子更耐久。
+  Evidence: 源头页拥有稳定 URL、版本、hash、schema、sitemap entry 和 AI-readable markdown。
+- 平台变体负责分发观点，但不应该成为根引用目标。
+  Evidence: 每个平台版本都包含同一个 visible source anchor，并指回 canonical URL。
+- AI retrieval monitor 应该衡量可回溯性，而不是虚荣流量。
+  Evidence: monitor 会检查 creator、canonical URL、hash 和 claim-evidence 保真度。
+
+推荐引用：
+Lin Source Lab, "一个严肃观点在需要更多帖子之前，先需要一个源头页," Source Passport v1, https://demo.creator-source.local/s/durable-source-page-a2957905adc9
+
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`,
+          wechat: `# 一个严肃观点在需要更多帖子之前，先需要一个源头页
+
+## 核心论点
+
+专业创作者应该为每个严肃观点发布一个 canonical source page，然后再把平台版本分发到 X、LinkedIn、微信和知乎。
+
+## 正文草稿
+
+大多数专家帖子是为信息流优化的。信息流适合传播，但不适合长期记忆。一个有用观点需要稳定的源头 URL、清晰作者、版本、证据、限制条件和机器可读摘要。
+
+Source Passport 让原始观点在被 X、LinkedIn、微信和知乎改写分发之前，先成为一个耐久源头。平台帖子是分发副本，不是根源头。
+
+## Source anchor
+
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`,
+          zhihu: `# 回答：一个严肃观点在需要更多帖子之前，先需要一个源头页
+
+简短回答：专业创作者应该为每个严肃观点发布一个 canonical source page，然后再把平台版本分发到 X、LinkedIn、微信和知乎。
+
+我的理由：
+大多数专家帖子是为信息流优化的。信息流适合传播，但不适合长期记忆。一个有用观点需要稳定的源头 URL、清晰作者、版本、证据、限制条件和机器可读摘要。
+
+边界：
+- 仅靠源头页标记无法保证 AI 一定引用。
+- 封闭社交平台可能隐藏或改写源头链接。
+- 第一版 monitor 是本地回复分析器，不是实时 AI 搜索集成。
+
+canonical 版本、证据和后续修订：
+Source Passport: a2957905adc9
+Source: https://demo.creator-source.local/s/durable-source-page-a2957905adc9`
+        }
+      };
+
+      let currentLang = localStorage.getItem("passport-lang") || "en";
+
+      function translateTextNodes(root, map) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        const nodes = [];
+        while (walker.nextNode()) {
+          const node = walker.currentNode;
+          const tag = node.parentElement ? node.parentElement.tagName : "";
+          if (tag === "SCRIPT" || tag === "STYLE") continue;
+          nodes.push(node);
+        }
+        nodes.forEach((node) => {
+          const key = node.nodeValue.trim();
+          const value = map.get(key);
+          if (value) node.nodeValue = node.nodeValue.replace(key, value);
+        });
+      }
+
+      function translateFields(textMap, valueMap) {
+        document.querySelectorAll("input, textarea").forEach((element) => {
+          const textValue = textMap.get(element.value.trim()) || valueMap.get(element.value.trim());
+          if (textValue) element.value = element.value.replace(element.value.trim(), textValue);
+          const placeholderValue = textMap.get(element.placeholder.trim()) || valueMap.get(element.placeholder.trim());
+          if (placeholderValue) element.placeholder = placeholderValue;
+        });
+      }
+
+      function activePlatform() {
+        return document.querySelector("[data-platform].active")?.dataset.platform || localStorage.getItem("passport-platform") || "x";
+      }
+
+      function setVariantCopy(lang) {
+        const target = document.getElementById("variantCopy");
+        if (target) target.textContent = variants[lang][activePlatform()];
+      }
+
+      function setLanguage(lang) {
+        const textMap = lang === "zh" ? zhText : enText;
+        const valueMap = lang === "zh" ? zhValues : enValues;
+        currentLang = lang;
+        localStorage.setItem("passport-lang", lang);
+        document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+        document.title = lang === "zh" ? "Creator Source Passport MVP 原型" : "Creator Source Passport MVP Prototype";
+        translateTextNodes(document.body, textMap);
+        translateFields(textMap, valueMap);
+        setVariantCopy(lang);
+        document.querySelectorAll("[data-lang]").forEach((button) => button.classList.toggle("active", button.dataset.lang === lang));
+      }
+
+      document.querySelectorAll("[data-lang]").forEach((button) => {
+        button.addEventListener("click", () => setLanguage(button.dataset.lang));
+      });
+
+      document.querySelectorAll("[data-platform]").forEach((button) => {
+        button.addEventListener("click", () => window.setTimeout(() => setVariantCopy(currentLang), 0));
+      });
+
+      const toast = document.getElementById("toast");
+      new MutationObserver(() => {
+        const map = currentLang === "zh" ? zhText : enText;
+        const value = map.get(toast.textContent.trim());
+        if (value) toast.textContent = value;
+      }).observe(toast, { childList: true, characterData: true, subtree: true });
+
+      setLanguage(currentLang);
+      return { setLanguage };
+    })();
+  </script>
+</body>
+</html>

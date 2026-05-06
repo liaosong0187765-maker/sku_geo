@@ -1,3 +1,39 @@
+# Current Project Mission
+
+Build the Creator Source Passport MVP.
+
+Before coding, read:
+
+- docs/PROJECT_CONTEXT.md
+- README.md
+- package.json
+- pyproject.toml
+- docker-compose.yml
+- .env.example
+
+Use docs/PROJECT_CONTEXT.md as the source of truth.
+
+Do not build:
+
+- generic GEO SaaS
+- full CMS
+- full social media scheduler
+- WeChat/Zhihu automation bot
+- payment system
+- team permission system
+
+Focus only on:
+
+- Source Passport model
+- canonical source page
+- AI-readable markdown assets
+- llms.txt / sitemap / robots / schema
+- platform variants
+- visible source anchor
+- AI retrieval monitor
+- revision suggestions
+
+
 \## Git Safety Rules
 
 
@@ -109,4 +145,42 @@ Default project loop:
 
 
 Do not ask the user before using gstack unless the operation is destructive, requires secrets, deploys to production, or changes external accounts.
+
+
+
+\## gstack Acceptance Criteria
+
+
+
+Use gstack to plan, build, review, and verify this project.
+
+
+
+Final result must satisfy:
+
+
+
+1\. The project can be installed and started locally.
+
+2\. The main user workflow works end-to-end.
+
+3\. The UI is usable, clean, and not just placeholder content.
+
+4\. The backend/API/data flow is connected if required.
+
+5\. No unrelated refactor or unnecessary feature expansion.
+
+6\. No secrets, databases, uploads, or user files are deleted.
+
+7\. Build/test/lint must be run before completion.
+
+8\. Use gstack review before final summary.
+
+9\. If there is a web UI, use gstack QA or browser testing to verify the core flow.
+
+10\. Final summary must include changed files, verification results, and remaining risks.
+
+
+
+
 

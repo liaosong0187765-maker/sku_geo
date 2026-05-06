@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Source Console Prototype</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell" data-view="source" data-lang="zh">
+    <aside class="rail" aria-label="Workflow">
+      <div class="mark">
+        <span class="mark-dot"></span>
+        <span>Source Console</span>
+      </div>
+      <nav class="steps">
+        <button class="step active" data-target="source">
+          <span>01</span>
+          <strong data-i18n="navSource">登记源头</strong>
+        </button>
+        <button class="step" data-target="canonical">
+          <span>02</span>
+          <strong data-i18n="navCanonical">源头页</strong>
+        </button>
+        <button class="step" data-target="publish">
+          <span>03</span>
+          <strong data-i18n="navPublish">分发与回填</strong>
+        </button>
+        <button class="step" data-target="monitor">
+          <span>04</span>
+          <strong data-i18n="navMonitor">引用检查</strong>
+        </button>
+        <button class="step" data-target="revise">
+          <span>05</span>
+          <strong data-i18n="navRevise">一键修订</strong>
+        </button>
+      </nav>
+      <div class="rail-footer">
+        <div class="tiny-label" data-i18n="railMode">MVP mode</div>
+        <div class="rail-status">
+          <span class="pulse"></span>
+          <span data-i18n="railStatus">本地原型，不自动发布</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" data-i18n="eyebrow">Canonical source infrastructure</p>
+          <h1 data-i18n="title">把一条重要观点变成 AI 可引用源头</h1>
+        </div>
+        <div class="top-actions">
+          <div class="lang-switch" aria-label="Language">
+            <button class="lang active" data-lang="zh">中文</button>
+            <button class="lang" data-lang="en">EN</button>
+          </div>
+          <button class="ghost" id="resetBtn" data-i18n="reset">重置演示</button>
+          <button class="primary" id="nextBtn" data-i18n="next">下一步</button>
+        </div>
+      </header>
+
+      <section class="signal-strip" aria-label="Source status">
+        <div>
+          <span data-i18n="statusCanonical">Canonical URL</span>
+          <strong id="canonicalUrl">pending</strong>
+        </div>
+        <div>
+          <span data-i18n="statusHash">Source hash</span>
+          <strong id="sourceHash">pending</strong>
+        </div>
+        <div>
+          <span data-i18n="statusAi">AI-ready assets</span>
+          <strong id="assetState" data-i18n="assetPending">待生成</strong>
+        </div>
+      </section>
+
+      <section class="panel active" id="source">
+        <div class="split hero-split">
+          <div class="editor-surface">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow" data-i18n="sourceEyebrow">Step 01</p>
+                <h2 data-i18n="sourceTitle">只问创作者一件事</h2>
+              </div>
+              <button class="primary" id="generateBtn" data-i18n="generate">生成源头页</button>
+            </div>
+            <label>
+              <span data-i18n="fieldTitle">标题</span>
+              <input id="inputTitle" value="A serious idea needs a source page before it needs more posts">
+            </label>
+            <label>
+              <span data-i18n="fieldThesis">核心论点</span>
+              <textarea id="inputThesis" rows="3">Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.</textarea>
+            </label>
+            <label>
+              <span data-i18n="fieldBody">正文</span>
+              <textarea id="inputBody" rows="10">Most expert posts are optimized for feeds. Feeds are good for reach, but weak for memory. A useful idea needs a stable source URL, a clear author, a version, evidence, limitations, and a machine-readable summary.
+
+A Source Passport makes the original idea durable before it gets remixed across X, LinkedIn, WeChat, and Zhihu. The platform posts become distribution copies, not the root source.</textarea>
+            </label>
+          </div>
+          <div class="outcome-card">
+            <p class="eyebrow" data-i18n="outcomeEyebrow">What the creator gets</p>
+            <h3 data-i18n="outcomeTitle">不是写作工具，是源头登记台。</h3>
+            <ul class="outcome-list">
+              <li data-i18n="outcomeOne">稳定源头页，带版本和 source hash</li>
+              <li data-i18n="outcomeTwo">X、LinkedIn、微信、知乎分发文案</li>
+              <li data-i18n="outcomeThree">发布 URL 回填和 source anchor 检查</li>
+              <li data-i18n="outcomeFour">AI 引用失败后的具体修订任务</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="canonical">
+        <div class="source-page-preview">
+          <div class="page-tools">
+            <span class="pill">v1</span>
+            <span class="pill">hash a2957905adc9</span>
+            <span class="pill">llms.txt ready</span>
+            <span class="pill">schema ready</span>
+          </div>
+          <article class="canonical-paper">
+            <p class="eyebrow">Lin Source Lab</p>
+            <h2>A serious idea needs a source page before it needs more posts</h2>
+            <p class="lead">Professional creators should publish one canonical source page for each serious idea, then distribute platform variants that point back to that source.</p>
+            <div class="citation-box">
+              <span data-i18n="citationLabel">Recommended citation</span>
+              <code>Lin Source Lab, "A serious idea needs a source page before it needs more posts," Source Passport v1, https://demo.creator-source.local/s/durable-source-page-a2957905adc9</code>
+            </div>
+            <div class="claim-grid">
+              <div>
+                <span data-i18n="claimOneLabel">Claim</span>
+                <p>A canonical source page is more durable than a platform post.</p>
+              </div>
+              <div>
+                <span data-i18n="evidenceLabel">Evidence</span>
+                <p>The page has stable URL, version, hash, schema, sitemap entry, and AI-readable markdown.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="publish">
+        <div class="publish-grid">
+          <div class="variant-card">
+            <div class="panel-head compact">
+              <div>
+                <p class="eyebrow" data-i18n="variantEyebrow">Anchor kit</p>
+                <h2 data-i18n="variantTitle">每个平台都是副本，源头只有一个</h2>
+              </div>
+            </div>
+            <div class="platform-tabs" role="tablist">
+              <button class="platform active" data-platform="x">X</button>
+              <button class="platform" data-platform="linkedin">LinkedIn</button>
+              <button class="platform" data-platform="wechat">WeChat</button>
+              <button class="platform" data-platform="zhihu">Zhihu</button>
+            </div>
+            <textarea id="variantText" rows="14" readonly></textarea>
+            <div class="variant-actions">
+              <button class="ghost" id="copyVariant" data-i18n="copy">复制文案</button>
+              <button class="primary" id="apiPublish" data-i18n="publishApi">一键发布接口位</button>
+            </div>
+          </div>
+          <div class="tracker-card">
+            <p class="eyebrow" data-i18n="trackerEyebrow">Publication map</p>
+            <h2 data-i18n="trackerTitle">发布后回填 URL</h2>
+            <div class="tracker-list" id="trackerList"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="monitor">
+        <div class="monitor-grid">
+          <div class="monitor-input">
+            <div class="panel-head compact">
+              <div>
+                <p class="eyebrow" data-i18n="monitorEyebrow">Citation check</p>
+                <h2 data-i18n="monitorTitle">粘贴 AI 回答，检查它是否回到源头</h2>
+              </div>
+              <button class="primary" id="runCheck" data-i18n="runCheck">运行检查</button>
+            </div>
+            <textarea id="aiResponse" rows="13">Creators should create canonical pages for serious ideas before distributing them to social platforms. A stable page can help AI systems understand claims and evidence. This is especially useful when content is copied across X, LinkedIn, WeChat, and Zhihu.</textarea>
+          </div>
+          <div class="score-card">
+            <div class="score-ring" id="scoreRing">42</div>
+            <p data-i18n="scoreLabel">源头回溯分</p>
+            <div class="checks" id="checks"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="revise">
+        <div class="revision-layout">
+          <div>
+            <p class="eyebrow" data-i18n="revisionEyebrow">Revision tasks</p>
+            <h2 data-i18n="revisionTitle">给创作者 3 条能直接执行的修改</h2>
+            <div class="suggestions" id="suggestions"></div>
+          </div>
+          <div class="live-diff">
+            <p class="eyebrow" data-i18n="liveDiff">Live source draft</p>
+            <textarea id="revisionDraft" rows="18"></textarea>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

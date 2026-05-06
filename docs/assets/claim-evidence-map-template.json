@@ -1,0 +1,113 @@
+{
+  "template_name": "claim-evidence-map",
+  "version": "1.0",
+  "scope": "Map each publishable SKU claim to explicit evidence before source-pack generation.",
+  "excluded_data": [
+    "price",
+    "inventory",
+    "discount",
+    "promotion",
+    "rating",
+    "review_count",
+    "review_excerpt",
+    "sales_volume",
+    "marketplace_ranking"
+  ],
+  "brand": {
+    "id": "brand-slug",
+    "name": "Official Brand Name",
+    "domain": "https://example.com"
+  },
+  "sku": {
+    "id": "sku-slug",
+    "product_name": "Official Product Name",
+    "model_number": "OPTIONAL-MODEL",
+    "category": "Product category",
+    "canonical_url": "https://example.com/products/sku-slug"
+  },
+  "claims": [
+    {
+      "id": "claim-product-identity",
+      "claim": "The SKU is the official product identified by the product name and model number.",
+      "claim_type": "spec",
+      "confidence": "medium",
+      "evidence_ids": [
+        "ev-official-product-page"
+      ],
+      "review_status": "needs_review",
+      "review_notes": "Replace placeholder claim with the customer's exact official product identity."
+    },
+    {
+      "id": "claim-key-spec",
+      "claim": "The SKU has the key specification stated in official evidence.",
+      "claim_type": "spec",
+      "confidence": "medium",
+      "evidence_ids": [
+        "ev-spec-sheet-or-manual"
+      ],
+      "review_status": "needs_review",
+      "review_notes": "Split into one claim per distinct spec."
+    },
+    {
+      "id": "claim-compatibility-boundary",
+      "claim": "The SKU is compatible with the named target only under the stated condition.",
+      "claim_type": "compatibility",
+      "confidence": "medium",
+      "evidence_ids": [
+        "ev-support-or-faq"
+      ],
+      "review_status": "needs_review",
+      "review_notes": "Include target device, standard, environment, or accessory condition."
+    },
+    {
+      "id": "claim-limitation",
+      "claim": "The SKU has a factual limitation that should be preserved in AI answers.",
+      "claim_type": "limitation",
+      "confidence": "medium",
+      "evidence_ids": [
+        "ev-support-or-faq"
+      ],
+      "review_status": "needs_review",
+      "review_notes": "State the limitation without legal interpretation or marketing language."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-official-product-page",
+      "source_type": "official_page",
+      "title": "Official product page",
+      "url": "https://example.com/products/sku-slug",
+      "excerpt": "Short excerpt or normalized fact from the official product page.",
+      "captured_at": "YYYY-MM-DD",
+      "section": "Product identity",
+      "confidence": "medium"
+    },
+    {
+      "id": "ev-spec-sheet-or-manual",
+      "source_type": "spec_sheet",
+      "title": "Official specification sheet or manual",
+      "url": "https://example.com/support/sku-slug/specs",
+      "excerpt": "Short excerpt or normalized fact from the official specification source.",
+      "captured_at": "YYYY-MM-DD",
+      "section": "Specifications",
+      "confidence": "medium"
+    },
+    {
+      "id": "ev-support-or-faq",
+      "source_type": "support_page",
+      "title": "Official support or FAQ page",
+      "url": "https://example.com/support/sku-slug",
+      "excerpt": "Short excerpt or normalized fact from the official support source.",
+      "captured_at": "YYYY-MM-DD",
+      "section": "Compatibility and limitations",
+      "confidence": "medium"
+    }
+  ],
+  "review_rules": [
+    "Every publishable claim must reference at least one evidence item.",
+    "Each claim should contain one factual assertion only.",
+    "Comparative claims require explicit competitor context or official specs.",
+    "Unsupported marketing language must be rewritten as a verifiable fact.",
+    "A reviewer must mark each claim as approved, rejected, or needs_revision before publication."
+  ]
+}

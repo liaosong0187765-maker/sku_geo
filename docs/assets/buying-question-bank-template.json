@@ -1,0 +1,306 @@
+{
+  "asset_type": "buying_question_bank_template",
+  "version": "v1",
+  "purpose": "Create 20-50 reusable buying questions for SKU source pages and retrieval monitoring.",
+  "excluded_fields": [
+    "price",
+    "inventory",
+    "ratings",
+    "reviews",
+    "promotions",
+    "rankings"
+  ],
+  "coverage_policy": {
+    "minimum_questions": 20,
+    "maximum_questions": 50,
+    "target_mix": {
+      "choose": "25-35%",
+      "compare": "20-30%",
+      "compatibility": "15-25%",
+      "limitation": "10-20%",
+      "setup": "5-15%",
+      "troubleshooting": "0-10%"
+    },
+    "rules": [
+      "Questions must reflect real buyer decision intent.",
+      "Questions must not rely on price, inventory, ratings, reviews, promotions, or rankings.",
+      "Questions must preserve product limitations and compatibility boundaries.",
+      "Every question should map to at least one selected SKU or category-level source page."
+    ]
+  },
+  "questions": [
+    {
+      "id": "q-001-best-for-use-case",
+      "question": "Which selected SKU is best for [use case]?",
+      "intent": "choose",
+      "sku_ids": [
+        "[sku-1-id]",
+        "[sku-2-id]",
+        "[sku-3-id]"
+      ],
+      "expected_facts": [
+        "Relevant use case fit from reviewed facts."
+      ],
+      "expected_limitations": [
+        "Known limitations that affect this use case."
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "q-002-compare-two-skus",
+      "question": "What is the difference between [SKU 1 Product Name] and [SKU 2 Product Name]?",
+      "intent": "compare",
+      "sku_ids": [
+        "[sku-1-id]",
+        "[sku-2-id]"
+      ],
+      "expected_facts": [
+        "Identity, key specs, and use-case differences."
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "q-003-compatible-with-target",
+      "question": "Is [SKU 1 Product Name] compatible with [target device, system, accessory, or environment]?",
+      "intent": "compatibility",
+      "sku_ids": [
+        "[sku-1-id]"
+      ],
+      "expected_facts": [
+        "Supported target and required conditions."
+      ],
+      "expected_limitations": [
+        "Unsupported or unverified compatibility cases."
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "q-004-not-for-scenario",
+      "question": "Which selected SKU should not be used for [scenario]?",
+      "intent": "limitation",
+      "sku_ids": [
+        "[sku-1-id]",
+        "[sku-2-id]",
+        "[sku-3-id]"
+      ],
+      "expected_limitations": [
+        "Not-for scenarios from reviewed source facts."
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "q-005-setup-requirements",
+      "question": "What setup requirements should a buyer know before using [SKU 1 Product Name]?",
+      "intent": "setup",
+      "sku_ids": [
+        "[sku-1-id]"
+      ],
+      "expected_facts": [
+        "Required setup conditions, accessories, software, or host environment."
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "q-006-category-choice",
+      "question": "How should a buyer choose among the selected SKUs in [category]?",
+      "intent": "choose",
+      "sku_ids": [
+        "[sku-1-id]",
+        "[sku-2-id]",
+        "[sku-3-id]"
+      ],
+      "expected_facts": [
+        "Category-level decision criteria."
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "q-007-spec-meaning",
+      "question": "What does [key spec] mean when choosing [SKU 2 Product Name]?",
+      "intent": "general",
+      "sku_ids": [
+        "[sku-2-id]"
+      ],
+      "expected_facts": [
+        "Definition and buyer impact of the key spec."
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "q-008-upgrade-path",
+      "question": "When should a buyer choose [SKU 3 Product Name] instead of [SKU 1 Product Name]?",
+      "intent": "compare",
+      "sku_ids": [
+        "[sku-1-id]",
+        "[sku-3-id]"
+      ],
+      "expected_facts": [
+        "Evidence-backed differences and fit."
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "q-009-lightweight-option",
+      "question": "Which selected SKU is the simplest option for [basic use case]?",
+      "intent": "choose",
+      "sku_ids": [
+        "[sku-1-id]",
+        "[sku-2-id]",
+        "[sku-3-id]"
+      ],
+      "expected_facts": [
+        "Minimum feature or requirement fit."
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "q-010-advanced-option",
+      "question": "Which selected SKU is better for [advanced use case]?",
+      "intent": "choose",
+      "sku_ids": [
+        "[sku-1-id]",
+        "[sku-2-id]",
+        "[sku-3-id]"
+      ],
+      "expected_facts": [
+        "Advanced feature or capacity fit."
+      ],
+      "expected_limitations": [
+        "Advanced-use caveats."
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "q-011-requirements-check",
+      "question": "Does [SKU 2 Product Name] require any additional accessory, software, host device, or setup condition?",
+      "intent": "setup",
+      "sku_ids": [
+        "[sku-2-id]"
+      ],
+      "expected_facts": [
+        "Requirements from official evidence."
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "q-012-certification-check",
+      "question": "What official certifications or compliance marks are listed for [SKU 3 Product Name]?",
+      "intent": "general",
+      "sku_ids": [
+        "[sku-3-id]"
+      ],
+      "expected_facts": [
+        "Certification facts from official evidence."
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "q-013-box-contents",
+      "question": "What is included with [SKU 1 Product Name]?",
+      "intent": "general",
+      "sku_ids": [
+        "[sku-1-id]"
+      ],
+      "expected_facts": [
+        "Included items from official evidence."
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "q-014-excluded-capability",
+      "question": "Does [SKU 2 Product Name] support [capability that may be confused with a real feature]?",
+      "intent": "limitation",
+      "sku_ids": [
+        "[sku-2-id]"
+      ],
+      "expected_limitations": [
+        "Explicit unsupported capability or unknown status."
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "q-015-compatibility-boundary",
+      "question": "What compatibility boundaries should a buyer know before choosing [SKU 3 Product Name]?",
+      "intent": "compatibility",
+      "sku_ids": [
+        "[sku-3-id]"
+      ],
+      "expected_facts": [
+        "Supported targets and conditions."
+      ],
+      "expected_limitations": [
+        "Unsupported targets or unverified cases."
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "q-016-category-alternative",
+      "question": "How does [SKU 1 Product Name] compare with approved alternatives in [category]?",
+      "intent": "compare",
+      "sku_ids": [
+        "[sku-1-id]"
+      ],
+      "competitor_context_ids": [
+        "context-category-alternative"
+      ],
+      "expected_facts": [
+        "Factual comparison points approved for this delivery."
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "q-017-problem-fit",
+      "question": "Can [SKU 2 Product Name] solve [buyer problem]?",
+      "intent": "choose",
+      "sku_ids": [
+        "[sku-2-id]"
+      ],
+      "expected_facts": [
+        "Use-case fit from official facts."
+      ],
+      "expected_limitations": [
+        "When the product is not a fit."
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "q-018-troubleshooting-caveat",
+      "question": "Why might [SKU 3 Product Name] not work as expected in [edge case]?",
+      "intent": "troubleshooting",
+      "sku_ids": [
+        "[sku-3-id]"
+      ],
+      "expected_facts": [
+        "Requirements or compatibility conditions."
+      ],
+      "expected_limitations": [
+        "Known edge-case limitation."
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "q-019-buyer-summary",
+      "question": "Give a concise buyer summary for [SKU 1 Product Name] using official facts.",
+      "intent": "general",
+      "sku_ids": [
+        "[sku-1-id]"
+      ],
+      "expected_facts": [
+        "Product identity, best-fit use case, key limitation, and canonical source."
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "q-020-citation-check",
+      "question": "Which official source should be cited for [SKU 2 Product Name] facts?",
+      "intent": "general",
+      "sku_ids": [
+        "[sku-2-id]"
+      ],
+      "expected_facts": [
+        "Canonical source page and official evidence references."
+      ],
+      "priority": "high"
+    }
+  ]
+}

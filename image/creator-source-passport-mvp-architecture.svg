@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+  <title id="title">Creator Source Passport MVP architecture</title>
+  <desc id="desc">Architecture diagram for the local-first Creator Source Passport MVP.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#124e66" />
+    </marker>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ecfeff" />
+      <stop offset="100%" stop-color="#f8fafc" />
+    </linearGradient>
+    <style>
+      .bg { fill: #f6f8fb; }
+      .title { fill: #102a43; font: 700 42px "Segoe UI", Arial, sans-serif; letter-spacing: 0; }
+      .subtitle { fill: #52616f; font: 400 20px "Segoe UI", Arial, sans-serif; letter-spacing: 0; }
+      .section { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 24; }
+      .section-blue { fill: url(#hero); stroke: #7dd3fc; stroke-width: 2; rx: 24; }
+      .box { fill: #ffffff; stroke: #94a3b8; stroke-width: 2; rx: 18; }
+      .box-accent { fill: #ecfdf5; stroke: #34d399; stroke-width: 2; rx: 18; }
+      .box-warn { fill: #fff7ed; stroke: #fb923c; stroke-width: 2; rx: 18; }
+      .box-purple { fill: #f5f3ff; stroke: #a78bfa; stroke-width: 2; rx: 18; }
+      .box-gray { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 2; rx: 18; }
+      .label { fill: #102a43; font: 700 22px "Segoe UI", Arial, sans-serif; letter-spacing: 0; }
+      .small { fill: #475569; font: 400 16px "Segoe UI", Arial, sans-serif; letter-spacing: 0; }
+      .tiny { fill: #64748b; font: 400 14px "Segoe UI", Arial, sans-serif; letter-spacing: 0; }
+      .code { fill: #334155; font: 600 14px "Consolas", "Segoe UI", monospace; letter-spacing: 0; }
+      .arrow { stroke: #124e66; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .arrow-soft { stroke: #64748b; stroke-width: 2.5; fill: none; marker-end: url(#arrow); stroke-dasharray: 8 8; }
+      .badge { fill: #0f766e; rx: 14; }
+      .badge-text { fill: #ffffff; font: 700 14px "Segoe UI", Arial, sans-serif; letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="980" />
+
+  <text x="80" y="78" class="title">Creator Source Passport MVP 架构图</text>
+  <text x="80" y="116" class="subtitle">一个高质量观点 → canonical source page → AI index pack → platform variants → monitor → revision loop</text>
+
+  <rect x="70" y="150" width="300" height="680" class="section-blue" />
+  <text x="100" y="196" class="label">1. 输入层</text>
+  <text x="100" y="226" class="small">Creator + Source JSON</text>
+
+  <rect x="105" y="270" width="230" height="116" class="box" />
+  <text x="130" y="310" class="label">源数据</text>
+  <text x="130" y="340" class="small">examples/source_passport.json</text>
+  <text x="130" y="366" class="tiny">creator / source / claims / prompts</text>
+
+  <rect x="105" y="430" width="230" height="116" class="box" />
+  <text x="130" y="470" class="label">CLI 命令</text>
+  <text x="130" y="500" class="code">generate</text>
+  <text x="220" y="500" class="code">serve</text>
+  <text x="130" y="526" class="tiny">python -m creator_passport</text>
+
+  <rect x="105" y="590" width="230" height="136" class="box-gray" />
+  <text x="130" y="630" class="label">可选入口</text>
+  <text x="130" y="660" class="small">Docker Compose</text>
+  <text x="130" y="686" class="small">editable install</text>
+  <text x="130" y="712" class="tiny">无外部运行时依赖</text>
+
+  <rect x="430" y="150" width="330" height="680" class="section" />
+  <text x="460" y="196" class="label">2. Source Passport Core</text>
+  <text x="460" y="226" class="small">校验、规范化、hash、canonical URL</text>
+
+  <rect x="475" y="270" width="240" height="120" class="box-accent" />
+  <text x="500" y="310" class="label">模型层</text>
+  <text x="500" y="340" class="small">Creator</text>
+  <text x="500" y="366" class="small">Claim / Reference</text>
+  <text x="500" y="392" class="code">models.py</text>
+
+  <rect x="475" y="444" width="240" height="134" class="box-accent" />
+  <text x="500" y="484" class="label">SourcePassport</text>
+  <text x="500" y="514" class="small">slugify + validate</text>
+  <text x="500" y="540" class="small">content_hash</text>
+  <text x="500" y="566" class="small">source_anchor</text>
+
+  <rect x="475" y="632" width="240" height="94" class="box-gray" />
+  <text x="500" y="672" class="label">稳定引用</text>
+  <text x="500" y="702" class="small">/<tspan>s</tspan>/&lt;slug&gt;-&lt;hash&gt;</text>
+
+  <rect x="820" y="150" width="330" height="680" class="section" />
+  <text x="850" y="196" class="label">3. 生成层</text>
+  <text x="850" y="226" class="small">Source page + AI-readable assets</text>
+
+  <rect x="865" y="270" width="240" height="130" class="box-purple" />
+  <text x="890" y="310" class="label">Source Page</text>
+  <text x="890" y="340" class="small">index.html</text>
+  <text x="890" y="366" class="small">source markdown</text>
+  <text x="890" y="392" class="code">render.py</text>
+
+  <rect x="865" y="440" width="240" height="150" class="box-purple" />
+  <text x="890" y="480" class="label">AI Index Pack</text>
+  <text x="890" y="510" class="small">llms.txt / llms-full.txt</text>
+  <text x="890" y="536" class="small">ai/index.md / profile.md</text>
+  <text x="890" y="562" class="small">schema / sitemap / robots</text>
+
+  <rect x="865" y="630" width="240" height="96" class="box-purple" />
+  <text x="890" y="670" class="label">Platform Studio</text>
+  <text x="890" y="700" class="small">X / LinkedIn / WeChat / Zhihu</text>
+  <text x="890" y="724" class="code">variants.py</text>
+
+  <rect x="1210" y="150" width="320" height="680" class="section" />
+  <text x="1240" y="196" class="label">4. 闭环层</text>
+  <text x="1240" y="226" class="small">手动发布、监控、修订建议</text>
+
+  <rect x="1250" y="270" width="240" height="116" class="box-warn" />
+  <text x="1275" y="310" class="label">人工发布</text>
+  <text x="1275" y="340" class="small">复制平台变体发布</text>
+  <text x="1275" y="366" class="small">保存 publication URL</text>
+
+  <rect x="1250" y="430" width="240" height="128" class="box-warn" />
+  <text x="1275" y="470" class="label">Retrieval Monitor</text>
+  <text x="1275" y="500" class="small">creator mentioned?</text>
+  <text x="1275" y="526" class="small">canonical URL / hash?</text>
+  <text x="1275" y="552" class="code">monitor.py</text>
+
+  <rect x="1250" y="610" width="240" height="116" class="box-warn" />
+  <text x="1275" y="650" class="label">Revision Loop</text>
+  <text x="1275" y="680" class="small">monitor/report.md</text>
+  <text x="1275" y="706" class="small">revision_suggestions.md</text>
+
+  <path d="M335 328 H475" class="arrow" />
+  <path d="M715 330 H865" class="arrow" />
+  <path d="M1105 330 H1250" class="arrow" />
+  <path d="M1105 512 H1250" class="arrow" />
+  <path d="M1370 610 C1370 870 610 890 595 726" class="arrow-soft" />
+
+  <rect x="420" y="860" width="760" height="70" class="section-blue" />
+  <rect x="450" y="882" width="110" height="28" class="badge" />
+  <text x="470" y="902" class="badge-text">MVP 边界</text>
+  <text x="590" y="904" class="small">不做 SaaS / CMS / 社交排期 / 自动发布 / 支付 / 团队权限；只打磨 Source Passport 闭环。</text>
+
+  <text x="80" y="910" class="tiny">Inputs: examples/source_passport.json</text>
+  <text x="80" y="936" class="tiny">Outputs: generated/demo/*</text>
+  <text x="1260" y="910" class="tiny">Source of truth: docs/PROJECT_CONTEXT.md</text>
+  <text x="1260" y="936" class="tiny">Main package: src/creator_passport</text>
+</svg>

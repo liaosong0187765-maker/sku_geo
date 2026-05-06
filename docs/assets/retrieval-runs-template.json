@@ -1,0 +1,114 @@
+{
+  "asset_type": "retrieval_runs_template",
+  "version": "v1",
+  "purpose": "Capture weekly AI retrieval monitor runs and produce a reusable customer report.",
+  "excluded_fields": [
+    "price",
+    "inventory",
+    "ratings",
+    "reviews",
+    "promotions",
+    "rankings"
+  ],
+  "weekly_run_plan": {
+    "cadence": "weekly",
+    "question_count": "20-50",
+    "sku_count": "3-5",
+    "inputs": [
+      "approved SKU source input",
+      "approved buying question bank",
+      "previous weekly monitor report if available"
+    ],
+    "checks": [
+      "brand_mentioned",
+      "sku_mentioned",
+      "canonical_url_cited",
+      "source_hash_cited",
+      "claim_coverage",
+      "wrong_specs_present",
+      "limitations_preserved",
+      "competitor_context_present",
+      "buying_intent_matched"
+    ],
+    "report_outputs": [
+      "weekly_summary",
+      "per_question_results",
+      "per_sku_issues",
+      "citation_gaps",
+      "wrong_fact_gaps",
+      "missing_limitation_gaps",
+      "revision_suggestions",
+      "human_review_actions"
+    ]
+  },
+  "report": {
+    "id": "[weekly-report-YYYY-WW]",
+    "brand_id": "[brand-id]",
+    "period_start": "[YYYY-MM-DD]",
+    "period_end": "[YYYY-MM-DD]",
+    "prepared_by": "[Delivery owner]",
+    "review_status": "draft",
+    "summary": {
+      "questions_run": 0,
+      "skus_checked": 0,
+      "providers_checked": [],
+      "canonical_citation_rate": 0,
+      "source_hash_citation_rate": 0,
+      "wrong_spec_count": 0,
+      "missing_limitation_count": 0,
+      "priority_revision_count": 0
+    },
+    "run_results": [
+      {
+        "id": "[run-001]",
+        "question_id": "[question-id]",
+        "ran_at": "[YYYY-MM-DDTHH:MM:SSZ]",
+        "provider": "[provider-name]",
+        "model": "[model-or-engine-name]",
+        "sku_ids": [
+          "[sku-1-id]"
+        ],
+        "response_text": "Captured response text or a short internal excerpt.",
+        "observations": {
+          "brand_mentioned": false,
+          "sku_mentioned": false,
+          "canonical_url_cited": false,
+          "source_hash_cited": false,
+          "wrong_specs_present": false,
+          "limitations_preserved": false,
+          "competitor_context_present": false,
+          "buying_intent_matched": false
+        },
+        "claim_coverage": {
+          "[claim-id]": "missing"
+        },
+        "score": 0,
+        "notes": "Observed gaps only. Do not infer expected behavior."
+      }
+    ],
+    "revision_suggestions": [
+      {
+        "id": "[suggestion-001]",
+        "source": "retrieval_run",
+        "retrieval_run_id": "[run-001]",
+        "severity": "medium",
+        "target": "source_page",
+        "sku_ids": [
+          "[sku-1-id]"
+        ],
+        "reason": "The response did not cite the canonical source page.",
+        "action": "Add or strengthen the canonical citation block and internal link from the related FAQ section.",
+        "status": "open"
+      }
+    ],
+    "human_review_actions": [
+      {
+        "id": "[action-001]",
+        "owner": "Customer reviewer or delivery owner",
+        "due_at": "[YYYY-MM-DD]",
+        "action": "Approve, reject, or revise the suggested source-page update.",
+        "status": "open"
+      }
+    ]
+  }
+}

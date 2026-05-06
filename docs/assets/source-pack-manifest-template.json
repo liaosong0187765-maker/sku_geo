@@ -1,0 +1,85 @@
+{
+  "template_name": "source-pack-manifest",
+  "version": "1.0",
+  "scope": "Reusable manifest for one customer SKU Source Passport delivery package.",
+  "customer": {
+    "customer_id": "[customer-slug]",
+    "brand_id": "[brand-slug]",
+    "delivery_id": "[YYYY-MM-DD-brand-sku-source-pack]",
+    "delivery_owner": "[name-or-role]",
+    "review_owner": "[name-or-role]"
+  },
+  "excluded_fields": [
+    "price",
+    "inventory",
+    "discount",
+    "promotion",
+    "rating",
+    "review_count",
+    "review_excerpt",
+    "sales_volume",
+    "marketplace_ranking"
+  ],
+  "source_inputs": {
+    "sku_source_json": "[path/to/customer/sku-source.json]",
+    "sku_selection_scorecard": "[path/to/customer/sku-selection-scorecard.json]",
+    "buying_question_bank": "[path/to/customer/buying-questions.json]",
+    "claim_evidence_map": "[path/to/customer/claim-evidence-map.json]"
+  },
+  "sku_source_packs": [
+    {
+      "sku_id": "[sku-slug]",
+      "status": "draft",
+      "canonical_url": "[https://brand.example/ai-source/sku-slug/]",
+      "source_hash": "[hash-or-revision-id]",
+      "last_reviewed_at": "[YYYY-MM-DD]",
+      "artifacts": {
+        "canonical_source_page": "[path/or/url]",
+        "markdown_mirror": "[path/or/url]",
+        "ai_product_index": "[path/or/url]",
+        "llms_txt": "[path/or/url]",
+        "sitemap_xml": "[path/or/url]",
+        "robots_txt": "[path/or/url]",
+        "schema_json_ld": "[path/or/url]",
+        "faq_schema": "[path/or/url]",
+        "comparison_data": "[path/or/url]",
+        "revision_suggestions": "[path/or/url]"
+      },
+      "review": {
+        "human_review_checklist": "[path/to/checklist.md]",
+        "approval_status": "needs_review",
+        "blocking_issues": [],
+        "approved_by": []
+      }
+    }
+  ],
+  "monitoring": {
+    "retrieval_runs": "[path/to/retrieval-runs.json]",
+    "latest_report": "[path/or/url]",
+    "cadence": "weekly",
+    "question_count": "[20-50]",
+    "checked_dimensions": [
+      "brand_mentioned",
+      "sku_mentioned",
+      "canonical_url_cited",
+      "source_hash_cited",
+      "claim_coverage",
+      "wrong_specs_present",
+      "limitations_preserved",
+      "competitor_context_present",
+      "buying_intent_matched"
+    ]
+  },
+  "handoff": {
+    "customer_handoff_doc": "[path/to/customer-handoff.md]",
+    "open_customer_actions": [],
+    "next_monitor_date": "[YYYY-MM-DD]"
+  },
+  "validation_rules": [
+    "Every listed SKU source pack must have a canonical source page, markdown mirror, schema, llms.txt entry, source hash or revision id, and review status.",
+    "Every publishable ProductClaim must map to at least one Evidence.id in the claim-evidence map.",
+    "No artifact may include price, inventory, discounts, promotions, ratings, reviews, sales volume, or marketplace ranking.",
+    "Unknown facts must remain omitted or marked as review gaps; do not guess.",
+    "Applied revision suggestions must create a new source hash or documented revision id."
+  ]
+}
